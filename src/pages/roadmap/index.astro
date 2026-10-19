@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { PHASES, STATUS_LABEL, phaseStats, features, totals, generatedFrom, AREAS } from '../../data/roadmap';
 import { REPO, url } from '../../data/site';
+import { UPDATES } from '../../data/updates';
 
 const groups = [
   { status: 'delivered', label: 'Delivered', phases: PHASES.filter((p) => p.status === 'delivered') },
@@ -37,6 +38,22 @@ const areaColor = (a: string) => AREAS[a]?.color ?? 'var(--text-3)';
         </ul>
       </div>
     ))}
+  </section>
+
+  <section class="wrap updates" aria-labelledby="updates-h">
+    <h2 id="updates-h" class="mono" data-reveal>Recent progress</h2>
+    <ol>
+      {UPDATES.slice(0, 6).map((u, i) => (
+        <li data-reveal style={`--i:${i}`}>
+          <header>
+            <time class="mono" datetime={u.date}>{u.date}</time>
+            <a class="mono" href={`${REPO}/compare/${u.range.replace('..', '...')}`} rel="noopener">{u.range}</a>
+          </header>
+          <h3>{u.title}</h3>
+          <ul>{u.items.map((t) => <li>{t}</li>)}</ul>
+        </li>
+      ))}
+    </ol>
   </section>
 
   <section class="wrap timeline" data-scroll="through">
@@ -116,6 +133,16 @@ const areaColor = (a: string) => AREAS[a]?.color ?? 'var(--text-3)';
   .now-col a { text-decoration: none; display: flex; gap: 10px; font-size: 15px; font-weight: 500; transition: color 0.2s, transform 0.3s var(--ease-out); }
   .now-col a:hover { color: var(--blue-2); transform: translateX(4px); }
   .now-col a span { color: var(--text-3); font-size: 12px; padding-top: 3px; }
+
+  .updates { display: grid; gap: 18px; margin-bottom: clamp(60px, 10vw, 120px); }
+  .updates > h2 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+  .updates ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .updates ol > li { padding: 20px 22px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); display: grid; gap: 10px; max-width: 900px; }
+  .updates header { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--text-3); }
+  .updates header a { color: var(--text-3); }
+  .updates header a:hover { color: var(--blue-2); }
+  .updates h3 { font-size: clamp(20px, 2.4vw, 26px); }
+  .updates ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; color: var(--text-2); font-size: 15px; }
 
   .timeline { position: relative; display: grid; gap: clamp(56px, 8vw, 96px); padding-bottom: 40px; --spine: 140px; }
   .spine { position: absolute; left: calc(var(--spine) + 7px); top: 0; bottom: 0; width: 2px; background: var(--line); }

@@ -65,7 +65,7 @@ export const PHASES: Phase[] = [
     n: 5, title: 'Graphics, data and automation', short: 'Graphics & automation', weeks: '12–16 weeks', status: 'building',
     summary: 'Titles, data-driven graphics, browser sources, playlists, scripts and every way to trigger them.',
     goals: ['Title scenes with shaping, animation and tickers', 'Title designer and live field editor', 'Isolated browser input with custom CSS', 'Data sources mapped to typed title fields', 'Triggers, macros, sandboxed Wasm scripts, PTZ and telestrator'],
-    now: 'The keyframe title animator, data sources, cue lists with timed GO and sandboxed scripts are in the studio.',
+    now: 'The keyframe title animator, data sources, cue lists with timed GO and a preview of each cue, and sandboxed scripts are in the studio.',
     exit: 'Automation scenario resumes from the last revision with no duplicate actions.',
   },
   {
