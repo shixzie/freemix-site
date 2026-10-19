@@ -7,6 +7,9 @@
     "directory": "./dist",
     "not_found_handling": "404-page"
   },
+  // Custom domain: Cloudflare creates the DNS record and certificate on deploy.
+  // The freemix.studio zone must be on the same Cloudflare account.
+  "routes": [{ "pattern": "freemix.studio", "custom_domain": true }],
   "workers_dev": true,
   "preview_urls": true
 }

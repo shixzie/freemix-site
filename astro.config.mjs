@@ -1,10 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// SITE sets the canonical origin (the Worker's custom domain once one is
-// attached). BASE only matters when serving from a subpath.
+// The public origin is freemix.studio; SITE overrides it for other hosts.
+// BASE only matters when serving from a subpath.
 export default defineConfig({
-  site: process.env.SITE || undefined,
+  site: process.env.SITE || 'https://freemix.studio',
   base: process.env.BASE || '/',
   trailingSlash: 'ignore',
 });
