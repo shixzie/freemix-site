@@ -1,10 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// SITE and BASE let the same build serve a custom domain or a GitHub Pages
-// project path (BASE=/freemix-site).
+// SITE sets the canonical origin (the Worker's custom domain once one is
+// attached). BASE only matters when serving from a subpath.
 export default defineConfig({
-  site: process.env.SITE ?? 'https://shixzie.github.io',
-  base: process.env.BASE ?? '/',
+  site: process.env.SITE || undefined,
+  base: process.env.BASE || '/',
   trailingSlash: 'ignore',
 });

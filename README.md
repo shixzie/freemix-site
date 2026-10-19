@@ -30,8 +30,16 @@ Phase titles, summaries and status live in `src/data/roadmap.ts`, condensed from
 
 ## Deploy
 
-The build is fully static. `SITE` and `BASE` environment variables set the canonical origin and base path, so the same build works on a custom domain or as a GitHub Pages project site:
+The site is hosted as a Cloudflare Worker that serves the static build with [Workers static assets](https://developers.cloudflare.com/workers/static-assets/); there is no Worker script. `wrangler.jsonc` points the Worker at `dist/`, unknown paths get `404.html`, and `public/_headers` makes hashed assets cache forever.
 
 ```sh
-SITE=https://shixzie.github.io BASE=/freemix-site npm run build
+npm run preview   # build, then serve through wrangler locally on :8787
+npm run deploy    # build, then wrangler deploy (needs `npx wrangler login` once)
 ```
+
+Pushes to `master` deploy automatically through `.github/workflows/deploy.yml`. It needs two repository secrets:
+
+- `CLOUDFLARE_API_TOKEN`: an API token with the **Edit Cloudflare Workers** template permissions
+- `CLOUDFLARE_ACCOUNT_ID`: the account ID from the Cloudflare dashboard
+
+Set the optional repository variable `SITE_URL` (for example `https://freemix.example`) once a custom domain is attached to the Worker, and add the domain under the Worker's **Settings → Domains & Routes** or as a `routes` entry in `wrangler.jsonc`.
