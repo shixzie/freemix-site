@@ -5,6 +5,7 @@ import { REPO, url } from '../data/site';
 
 interface Props { title: string; description: string; current?: 'home' | 'features' | 'roadmap' }
 const { title, description, current = 'home' } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 const links = [
   { href: url('features/'), label: 'Features', key: 'features' },
   { href: url('roadmap/'), label: 'Roadmap', key: 'roadmap' },
@@ -22,6 +23,8 @@ const links = [
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {canonical && <meta property="og:url" content={canonical} />}
     <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
   </head>
   <body>

@@ -43,4 +43,4 @@ Production deploys run on [Cloudflare Workers Builds](https://developers.cloudfl
 - Deploy command: `npx wrangler deploy`
 - Production branch: `master`
 
-The Worker name in Cloudflare must match `name` in `wrangler.jsonc` (`freemix-site`). Set a `SITE` build variable to the public origin (for example `https://freemix.example`) once a custom domain is attached under the Worker's **Settings → Domains & Routes**.
+The Worker name in Cloudflare must match `name` in `wrangler.jsonc` (`freemix-site`). The site is served at [freemix.studio](https://freemix.studio): `wrangler.jsonc` declares it as a custom domain, so the first deploy creates its DNS record and certificate, which needs the `freemix.studio` zone on the same Cloudflare account. Canonical URLs default to `https://freemix.studio`; set a `SITE` build variable only to build for a different origin.
