@@ -1,0 +1,1597 @@
+{
+  "generatedFrom": {
+    "commit": "1c841b0",
+    "date": "2026-10-19",
+    "protocol": "2.67"
+  },
+  "stats": {
+    "crates": 58,
+    "apps": 7,
+    "rustLines": 709221
+  },
+  "features": [
+    {
+      "id": "IN-001",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "platform-professional-hardware",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [],
+      "area": "Inputs and source management",
+      "capability": "Local camera/capture inputs at SD, HD, UHD; common progressive and interlaced frame rates",
+      "acceptance": "Enumerate, hot-plug, configure format, acquire A/V, detect signal loss, and recover without changing input ID"
+    },
+    {
+      "id": "IN-002",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "platform-professional-hardware",
+      "status": "blocked",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-001"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Vendor capture adapters: Blackmagic, AJA, Magewell-class UVC, Bluefish444 where SDK permits",
+      "acceptance": "Adapter capability tests cover embedded audio, timecode, genlock status, and supported pixel formats"
+    },
+    {
+      "id": "IN-003",
+      "priority": "P0",
+      "phase": 2,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [],
+      "area": "Inputs and source management",
+      "capability": "Video files and growing files",
+      "acceptance": "Seek, pause, resume, loop, trim, speed change, end triggers, audio track selection, and frame-accurate position"
+    },
+    {
+      "id": "IN-004",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-003"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Common containers/codecs: MP4, MOV, MKV, MXF, MPEG-TS, AVI and licensed H.264/H.265/AAC/ProRes/DNx/MPEG variants",
+      "acceptance": "Golden files decode with timestamp, color, channel, rotation, and interlace metadata preserved"
+    },
+    {
+      "id": "IN-005",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "audio-dsp",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-003",
+        "AU-003"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Audio files and multichannel audio-only devices",
+      "acceptance": "WAV/FLAC/MP3/AAC-class playback plus device channel selection and mapping"
+    },
+    {
+      "id": "IN-006",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "media-core-clocks",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-003"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Media List input",
+      "acceptance": "Mixed audio/video/M3U list supports order, search, shuffle, Auto Next/Auto First, next/previous, loop, per-item marks, and active-item events"
+    },
+    {
+      "id": "IN-007",
+      "priority": "P2",
+      "phase": 9,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-003"
+      ],
+      "area": "Inputs and source management",
+      "capability": "DVD/menu input where platform and licensing allow",
+      "acceptance": "Load title/menu, navigate, select audio/subtitles, and preserve aspect ratio"
+    },
+    {
+      "id": "IN-008",
+      "priority": "P0",
+      "phase": 2,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [],
+      "area": "Inputs and source management",
+      "capability": "Still image and solid color/bars",
+      "acceptance": "Load common image formats, respect alpha/orientation/color profile, generate colors/bars without per-frame CPU upload"
+    },
+    {
+      "id": "IN-009",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "media-core-clocks",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-008"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Photo/slideshow input",
+      "acceptance": "Folder/list, duration, transition, pan/zoom, random/ordered playback, live list edits, optional thumbnail suppression, and filename fallback for very large sets"
+    },
+    {
+      "id": "IN-010",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-003"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Image sequence and stinger input",
+      "acceptance": "Decode alpha sequence/video, configure cut point, preload, and play deterministically"
+    },
+    {
+      "id": "IN-011",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "platform-professional-hardware",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-026"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Local display/window/application capture with optional audio",
+      "acceptance": "Enumerate targets, crop, cursor toggle, and survive resize/target closure"
+    },
+    {
+      "id": "IN-012",
+      "priority": "P1",
+      "phase": 6,
+      "owner": "replay-guests",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-011"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Remote desktop capture agent",
+      "acceptance": "Pair, choose screen/window, receive A/V, report latency/loss, and provide tally"
+    },
+    {
+      "id": "IN-013",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-026"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Browser input",
+      "acceptance": "Navigate, interact, zoom, transparent background, custom CSS, browser audio, HTML5 media, cookies/profile isolation, and refresh-on-activate"
+    },
+    {
+      "id": "IN-014",
+      "priority": "P2",
+      "phase": 9,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-008"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Presentation input",
+      "acceptance": "Import/render PowerPoint-compatible slides or use a documented PDF/image fallback; next/previous and notes metadata"
+    },
+    {
+      "id": "IN-015",
+      "priority": "P0",
+      "phase": 4,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-026"
+      ],
+      "area": "Inputs and source management",
+      "capability": "IP stream input",
+      "acceptance": "RTSP/RTP/UDP/TCP/HTTP MPEG-TS and common HLS/HTTP inputs reconnect with bounded jitter buffering"
+    },
+    {
+      "id": "IN-016",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-015"
+      ],
+      "area": "Inputs and source management",
+      "capability": "RTMP input",
+      "acceptance": "Receive supported RTMP A/V and reconnect with status"
+    },
+    {
+      "id": "IN-017",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": true,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-015"
+      ],
+      "area": "Inputs and source management",
+      "capability": "SRT caller/listener/rendezvous",
+      "acceptance": "Both input and output modes support caller/listener/rendezvous, passphrases up to 256-bit, stream ID, latency, statistics, reconnect, H.264/HEVC up to UHD when capable, MPEG-TS/AAC-LC, and up to eight audio channels/split stereo pairs"
+    },
+    {
+      "id": "IN-018",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "platform-professional-hardware",
+      "status": "blocked",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-001"
+      ],
+      "area": "Inputs and source management",
+      "capability": "NDI send/receive and discovery, including alpha where licensed",
+      "acceptance": "Discover, connect, low-bandwidth preview, metadata/tally, alpha, and isolated loss recovery"
+    },
+    {
+      "id": "IN-019",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-015"
+      ],
+      "area": "Inputs and source management",
+      "capability": "OMT send/receive",
+      "acceptance": "Open OMT adapter supports discovery, preview plus low/medium/high quality, alpha/audio, UHD, 120fps+ when capable, corrupt-data fault tolerance, send/receive, and direct replay/ISO record without re-encode when compatible"
+    },
+    {
+      "id": "IN-020",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-006"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Scene/layer input",
+      "acceptance": "One background plus at least ten positioned foreground layers, each crop/transform/key/effect capable"
+    },
+    {
+      "id": "IN-021",
+      "priority": "P1",
+      "phase": 9,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-020",
+        "SW-008"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Virtual set",
+      "acceptance": "Camera source, keyed talent, animated/zoomable set layers, reflection/shadow hooks, and presets"
+    },
+    {
+      "id": "IN-022",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "media-core-clocks",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-001"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Video delay",
+      "acceptance": "Configurable live delay, loop/freeze, save clip, audio sync, and capacity estimate"
+    },
+    {
+      "id": "IN-023",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Secondary Mix input",
+      "acceptance": "At least 15 addressable preview/program mini-mixes with cut/transitions, output-only mode, downstream routing with defined cycle timing, and Overlay/Stinger targeting to one or several Mixes"
+    },
+    {
+      "id": "IN-024",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "media-core-clocks",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-023"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Program/preview-as-input",
+      "acceptance": "Safe graph-cycle detection, one-frame feedback behavior defined, and clean routing"
+    },
+    {
+      "id": "IN-025",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "engine-control-persistence-security",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-026"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Virtual inputs/aliases",
+      "acceptance": "Reuse a source with independent transform, effects, audio, name, shortcuts, and layer state"
+    },
+    {
+      "id": "IN-026",
+      "priority": "P0",
+      "phase": 2,
+      "owner": "engine-control-persistence-security",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [],
+      "area": "Inputs and source management",
+      "capability": "Input lifecycle",
+      "acceptance": "Add, duplicate, reorder, categorize, color-label, rename, pause, close, offline, replace source, and batch import"
+    },
+    {
+      "id": "IN-027",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-026"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Per-input triggers",
+      "acceptance": "Ordered delayed actions on Transition In/Out, Overlay In/Out, Completion, Countdown Completed/Time/Remaining, Playback Time/Remaining, Call Connected/Disconnected, Zoom active-speaker/while-in-output/self, and Replay Events Completed"
+    },
+    {
+      "id": "IN-028",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "platform-professional-hardware",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-001"
+      ],
+      "area": "Inputs and source management",
+      "capability": "PTZ cameras",
+      "acceptance": "Network-controlled/UVC PTZ supports pan/tilt/zoom/focus/speed, presets as virtual inputs, joystick/mouse/shortcut operation; serial-only and additional ONVIF breadth are FreeMix extensions"
+    },
+    {
+      "id": "IN-029",
+      "priority": "P2",
+      "phase": 6,
+      "owner": "replay-guests",
+      "status": "blocked",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "RC-001"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Named Zoom meeting integration",
+      "acceptance": "Authorized SDK adapter joins Meetings/Events/Sessions, searches and assigns multiple participants, exposes camera/share/audio, switches camera/share, provides chat/manager/return feed, and emits active-speaker triggers"
+    },
+    {
+      "id": "IN-030",
+      "priority": "P2",
+      "phase": 9,
+      "owner": "platform-professional-hardware",
+      "status": "planned",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-003"
+      ],
+      "area": "Inputs and source management",
+      "capability": "Archived-format inputs",
+      "acceptance": "Windows-only plugin may import documented Flash/SWF/FLV and WPF/XAML-era assets; unsupported active content receives a safe conversion report"
+    },
+    {
+      "id": "SW-001",
+      "priority": "P0",
+      "phase": 2,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [],
+      "area": "Switching, composition, and video processing",
+      "capability": "Main preview/program switcher",
+      "acceptance": "Cut and timed transition are frame-boundary atomic; UI, API, keyboard, and controller stay consistent"
+    },
+    {
+      "id": "SW-002",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Transition family",
+      "acceptance": "Cut, fade, zoom, wipes, slides, fly, fly-rotate, cube, cube-zoom, cross-zoom, vertical variants, merge, and AlphaFade; at least four favorite buttons are operator-assignable"
+    },
+    {
+      "id": "SW-003",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "SW-002",
+        "IN-010"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Stingers",
+      "acceptance": "At least eight configurable stingers with alpha, cut point, audio, preload, and missing-media fallback"
+    },
+    {
+      "id": "SW-004",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Fade to black and T-bar",
+      "acceptance": "FTB affects configured outputs; T-bar provides reversible manual transition progress"
+    },
+    {
+      "id": "SW-005",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Eight overlay channels",
+      "acceptance": "Independent source, transition, duration, position/border preset, queue, on/off, and per-output inclusion"
+    },
+    {
+      "id": "SW-006",
+      "priority": "P0",
+      "phase": 2,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [],
+      "area": "Switching, composition, and video processing",
+      "capability": "Layer designer",
+      "acceptance": "Direct manipulation plus numeric pan, zoom, crop, rotation, anchor, opacity, z-order, masks, and safe-area snapping"
+    },
+    {
+      "id": "SW-007",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-006"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Video effects",
+      "acceptance": "Color adjustments, lift/gamma/gain, hue/saturation, white/black levels, sharpen, deinterlace, flip, crop, pan, zoom, rotate"
+    },
+    {
+      "id": "SW-008",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-006"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Keying",
+      "acceptance": "Chroma/blue/green auto key, manual chroma controls, luma key, alpha, premultiplication, and key/fill input"
+    },
+    {
+      "id": "SW-009",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "SW-007"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "4:4:4 32-bit-class processing parity; canonical float FreeMix pipeline",
+      "acceptance": "Test patterns demonstrate no unintended range, transfer, alpha, or chroma conversion; floating-point working semantics are a FreeMix quality decision, not attributed to vMix"
+    },
+    {
+      "id": "SW-010",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-007"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Color monitoring",
+      "acceptance": "RGB/Y waveform, RGB parade, vectorscope, split view, pixel sampler, and input/program selection"
+    },
+    {
+      "id": "SW-011",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Two independent multiviews",
+      "acceptance": "Each selects Mix, layout/order, Program/Preview/inputs, labels, tally, clocks, chosen audio meters, inputs-only or single-input confidence mode, and click/touch-to-Preview"
+    },
+    {
+      "id": "SW-012",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Four independent logical outputs and clean feeds",
+      "acceptance": "Outputs 1–4 independently select Program/Preview/input/Mix/MultiView and include chosen overlays/audio maps"
+    },
+    {
+      "id": "SW-013",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "studio-web-ux",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Production clocks",
+      "acceptance": "Time-of-day, count up/down, remaining media time, stream/record/replay timers, timezone, and API exposure"
+    },
+    {
+      "id": "SW-014",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "studio-web-ux",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-011"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Safe areas and aspect guides",
+      "acceptance": "SMPTE/action/title and custom guides appear only in operator views unless routed explicitly"
+    },
+    {
+      "id": "SW-015",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-006"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Vertical and arbitrary canvas production",
+      "acceptance": "Parity test covers the vMix-style 1080x1920 vertical crop/safe-area/rotation workflow; independent arbitrary canvases and responsive scenes are FreeMix extensions"
+    },
+    {
+      "id": "SW-016",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "media-core-clocks",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Snapshot and freeze/live-pause",
+      "acceptance": "Capture lossless still, freeze at frame boundary, resume without timestamp regression"
+    },
+    {
+      "id": "SW-017",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "engine-control-persistence-security",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-026"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Undo/redo and padlock",
+      "acceptance": "Editing commands are undoable; live transport actions follow explicit safety rules; locked inputs reject accidental edits"
+    },
+    {
+      "id": "SW-018",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-020"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Flatten layers",
+      "acceptance": "Precompose a layered input at a deliberate graph boundary while preserving output timing and showing memory/quality cost"
+    },
+    {
+      "id": "SW-019",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "gpu-compositor-color",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-007",
+        "SW-010"
+      ],
+      "area": "Switching, composition, and video processing",
+      "capability": "Color grading suite",
+      "acceptance": "Per-input, per-scene-layer, and program grading with lift/gamma/gain color wheels, RGB and hue/saturation curves, white balance, LUT (.cube) import, saveable presets, and a live before/after split preview with scopes beside it"
+    },
+    {
+      "id": "GX-001",
+      "priority": "P0",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-005"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Text/image/shape title templates",
+      "acceptance": "Editable fields, alpha, fonts, alignment, outline/shadow, auto-fit, per-field visibility, and reusable templates"
+    },
+    {
+      "id": "GX-002",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "GX-001"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Animated title designer",
+      "acceptance": "Keyframes, easing, groups, masks, tickers, transitions, clocks, and GPU-rendered playback"
+    },
+    {
+      "id": "GX-003",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "GX-002"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Scoreboards and tickers",
+      "acceptance": "Team/player fields, scores, clocks, increment/decrement shortcuts, crawl/roll, and external data mapping"
+    },
+    {
+      "id": "GX-004",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": true,
+      "testsPresent": true,
+      "dependencies": [
+        "GX-001"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Data sources",
+      "acceptance": "CSV, JSON, XML/XPath, RSS, text/file, HTTP/HTML tables, spreadsheet/Google Sheets-class adapters, Zoom chat, database adapter, polling/push, row selection, and transforms"
+    },
+    {
+      "id": "GX-005",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "GX-004"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Data-to-title mapping",
+      "acceptance": "Bind text, image URI, visibility, color, number/date format, and list row with preview/test state"
+    },
+    {
+      "id": "GX-006",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "studio-web-ux",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "GX-001",
+        "RC-007"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Browser title/editor control",
+      "acceptance": "Authorized client can edit exposed fields, preview changes, take/update/off-air, and use optimistic concurrency"
+    },
+    {
+      "id": "GX-007",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-005"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Telestrator",
+      "acceptance": "Low-latency program/input preview, simultaneous multi-device drawing, pen/line/arrow/shape/text, custom images, laser pointer, colors, undo/clear, transparent routed layer, and ten production shortcut buttons"
+    },
+    {
+      "id": "GX-008",
+      "priority": "P2",
+      "phase": 9,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "GX-001"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Import pipeline",
+      "acceptance": "Layered PSD and documented graphic formats map to editable layers where legal/technically possible"
+    },
+    {
+      "id": "GX-009",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "platform-professional-hardware",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": false,
+      "dependencies": [
+        "GX-001"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Key/fill graphics output",
+      "acceptance": "Synchronized key and fill through supported hardware/network outputs"
+    },
+    {
+      "id": "GX-010",
+      "priority": "P2",
+      "phase": 9,
+      "owner": "graphics-data-automation-plugins",
+      "status": "blocked",
+      "exactIntegration": true,
+      "testsPresent": true,
+      "dependencies": [
+        "GX-004"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Social moderation companion",
+      "acceptance": "Authorized Facebook page comments, Twitch, YouTube Live chat, Bluesky, IRC, and Zoom chat adapters aggregate into a browser approval queue with title mapping, profile media/photos, rotation, and auto-update"
+    },
+    {
+      "id": "GX-011",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "GX-002",
+        "SW-006"
+      ],
+      "area": "Titles, graphics, data, and telestration",
+      "capability": "Keyframe animation editor",
+      "acceptance": "Visual timeline for any title element or scene layer: keyframe position, scale, rotation, opacity, crop, and color; easing presets plus a curve editor; interpolated in-betweens; retiming a clip or whole animation scales its keyframes proportionally; scrubbed live preview; reusable In/Out animation presets"
+    },
+    {
+      "id": "AU-001",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "audio-dsp",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [],
+      "area": "Audio",
+      "capability": "Per-input mixer strip",
+      "acceptance": "Gain, fader, mute, follow-video, solo/PFL with a headphone monitor output, pan/balance, delay, meter, bus sends, labels, and groups"
+    },
+    {
+      "id": "AU-002",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "audio-dsp",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "AU-001"
+      ],
+      "area": "Audio",
+      "capability": "Master plus seven auxiliary buses",
+      "acceptance": "Independent mixes, mute/fader/processing, named routing, device/network/record destinations, and mix-minus"
+    },
+    {
+      "id": "AU-003",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "audio-dsp",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "AU-001"
+      ],
+      "area": "Audio",
+      "capability": "Multichannel audio",
+      "acceptance": "Preserve channel count/layout, map matrix, stereo pairs/mono, downmix, embedded/de-embedded audio"
+    },
+    {
+      "id": "AU-004",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "media-core-clocks",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "AU-003"
+      ],
+      "area": "Audio",
+      "capability": "Sample-rate conversion and sync",
+      "acceptance": "Stable 48 kHz engine clock by default, drift compensation, discontinuity handling, and per-source sync telemetry"
+    },
+    {
+      "id": "AU-005",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "audio-dsp",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "AU-001"
+      ],
+      "area": "Audio",
+      "capability": "Native DSP",
+      "acceptance": "Parametric EQ, high-pass, compressor/limiter, gate/expander, polarity, delay, and loudness/peak metering"
+    },
+    {
+      "id": "AU-006",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "audio-dsp",
+      "status": "blocked",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "AU-005"
+      ],
+      "area": "Audio",
+      "capability": "VST3 plugins where licensed",
+      "acceptance": "Scan, validate, order, bypass, save state, compensate latency, expose editor, and quarantine crashes"
+    },
+    {
+      "id": "AU-007",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "audio-dsp",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "AU-001"
+      ],
+      "area": "Audio",
+      "capability": "Audio follow/auto-mixing",
+      "acceptance": "Configurable AFV and microphone automix with weight/priority and gain-sharing telemetry"
+    },
+    {
+      "id": "AU-008",
+      "priority": "P1",
+      "phase": 3,
+      "owner": "audio-dsp",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "AU-002"
+      ],
+      "area": "Audio",
+      "capability": "Monitoring and talkback",
+      "acceptance": "PFL/solo bus, dim, selectable device, guest/camera talkback routes, and no accidental program injection"
+    },
+    {
+      "id": "AU-009",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "audio-dsp",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "AU-001"
+      ],
+      "area": "Audio",
+      "capability": "Fader/controller feedback",
+      "acceptance": "High-rate coalesced control and activator feedback without zipper noise"
+    },
+    {
+      "id": "AU-010",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "audio-dsp",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "AU-003"
+      ],
+      "area": "Audio",
+      "capability": "Recording audio flexibility",
+      "acceptance": "Select buses/channels per recorder, split WAV, multichannel track mapping, and metadata"
+    },
+    {
+      "id": "AU-011",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "platform-professional-hardware",
+      "status": "planned",
+      "exactIntegration": true,
+      "testsPresent": true,
+      "dependencies": [
+        "AU-002"
+      ],
+      "area": "Audio",
+      "capability": "Application/system audio capture and virtual audio device",
+      "acceptance": "Capture supported targets; publish program/buses to third-party apps through signed OS drivers where required"
+    },
+    {
+      "id": "OR-001",
+      "priority": "P0",
+      "phase": 2,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-003"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Program recording",
+      "acceptance": "MP4 plus a high-quality fault-tolerant 4:2:2 editing format equivalent to vMix AVI; optional Windows Media compatibility and FFmpeg MPEG-2/MP4/VC-3 profiles; hardware/software encode, segment, safe stop, duration/space status"
+    },
+    {
+      "id": "OR-002",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "OR-001"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Two independent program recorders",
+      "acceptance": "Different source, overlays, audio map, codec, resolution, and destination can run concurrently"
+    },
+    {
+      "id": "OR-003",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "OR-001"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Fault-tolerant recording",
+      "acceptance": "Crash/power-interrupted fixture yields a playable finalized or repairable file with bounded loss"
+    },
+    {
+      "id": "OR-004",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "OR-001"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "MultiCorder/ISO",
+      "acceptance": "Simultaneously record selected raw camera/input feeds with embedded/mapped audio and shared or source timecode"
+    },
+    {
+      "id": "OR-005",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-015"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Streaming destinations",
+      "acceptance": "RTMP/RTMPS and SRT output, service profiles, custom server/key, reconnect, backup URL, and per-destination health"
+    },
+    {
+      "id": "OR-006",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "OR-005"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Five simultaneous destinations and independent control",
+      "acceptance": "Start/stop/retry each destination independently or as a group without affecting recording"
+    },
+    {
+      "id": "OR-007",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "OR-005"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Multi-bitrate/ABR",
+      "acceptance": "Single-key and multi-key ladders, per-rendition output/audio/quality, and explicit compatibility rule with five-destination mode"
+    },
+    {
+      "id": "OR-008",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "platform-professional-hardware",
+      "status": "blocked",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "SW-012"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Four physical external outputs",
+      "acceptance": "Outputs 1–4 route independently to certified AJA/Blackmagic/Bluefish-class devices with embedded audio, reference/genlock, and key/fill where supported"
+    },
+    {
+      "id": "OR-009",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "codecs-network-recording",
+      "status": "blocked",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "SW-012",
+        "IN-017"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "NDI/OMT/SRT outputs",
+      "acceptance": "Four independently routed outputs with discovery, alpha where available, and audio mapping; NDI/OMT can also publish every Camera/Call and audio input plus audio-only buses"
+    },
+    {
+      "id": "OR-010",
+      "priority": "P1",
+      "phase": 8,
+      "owner": "platform-professional-hardware",
+      "status": "planned",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "SW-012",
+        "AU-011"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Four virtual camera outputs and virtual audio",
+      "acceptance": "Four independently routed virtual video outputs plus audio-device publishing through signed Windows/macOS components and Linux PipeWire/V4L2-compatible paths"
+    },
+    {
+      "id": "OR-011",
+      "priority": "P0",
+      "phase": 2,
+      "owner": "platform-professional-hardware",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Two fullscreen/display outputs",
+      "acceptance": "Two independent borderless outputs on chosen displays with source, mode, scaling, HDR state, cursor suppression, and hot-plug recovery"
+    },
+    {
+      "id": "OR-012",
+      "priority": "P1",
+      "phase": 7,
+      "owner": "replay-guests",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "OR-004"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Instant replay, up to eight cameras",
+      "acceptance": "Continuous synchronized capture up to 4K/240fps when capable, four-channel audio, per-camera storage roots, last 5/10/20 and In/Out marks, independent/linked A/B channels, angle switching, speed/jog/shuttle"
+    },
+    {
+      "id": "OR-013",
+      "priority": "P1",
+      "phase": 7,
+      "owner": "replay-guests",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "OR-012"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Replay playlists/highlights",
+      "acceptance": "At least 20 named lists with unlimited events, multiple tags/folders, per-event angle/marks/speed, transitions/music, configured export audio, export during recording, and auto-return to live"
+    },
+    {
+      "id": "OR-014",
+      "priority": "P1",
+      "phase": 7,
+      "owner": "replay-guests",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "OR-012"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Replay multiview/quad view and controllers",
+      "acceptance": "Synchronized high-quality four-angle Quad View, Replay MultiView, live/recorded modes, shortcut/activator surface, dual-controller profiles, and disk capacity/health"
+    },
+    {
+      "id": "OR-015",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-006"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Playlist automation",
+      "acceptance": "Scheduled/relative start, duration, transition, loop, pause, next, active-state persistence, and API control"
+    },
+    {
+      "id": "OR-016",
+      "priority": "P2",
+      "phase": 8,
+      "owner": "codecs-network-recording",
+      "status": "planned",
+      "exactIntegration": true,
+      "testsPresent": false,
+      "dependencies": [
+        "IN-019",
+        "OR-004"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "Direct network-source recording",
+      "acceptance": "Record an OMT/compatible compressed source into replay or ISO storage without re-encode when formats are safe and supported"
+    },
+    {
+      "id": "OR-017",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "studio-web-ux",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "OR-005"
+      ],
+      "area": "Recording, replay, streaming, and outputs",
+      "capability": "LiveLAN",
+      "acceptance": "Access-controlled Web Controller page exposes a LAN HLS URL, reports per-viewer/capacity bandwidth, and validates the expected roughly ten-second latency class without affecting Program"
+    },
+    {
+      "id": "RC-001",
+      "priority": "P1",
+      "phase": 6,
+      "owner": "replay-guests",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-015",
+        "AU-008"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Up to eight encrypted browser guests",
+      "acceptance": "Host-a-call/connect-to-call, invite/password, direct/low-latency modes, camera/mic selection, dynamic bandwidth, return up to 1080p/4 Mbps, reconnect, lobby, remove, stats, and automatic NDI exposure"
+    },
+    {
+      "id": "RC-002",
+      "priority": "P1",
+      "phase": 6,
+      "owner": "replay-guests",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-001",
+        "AU-002"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Guest audio/return/talkback",
+      "acceptance": "Full-duplex audio, automatic mix-minus, independently selectable Outputs 1–4 and Master/Headphones/A–G return audio, talkback, mute, gain, latency, and echo status"
+    },
+    {
+      "id": "RC-003",
+      "priority": "P1",
+      "phase": 6,
+      "owner": "replay-guests",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-001"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Guest manager and chat",
+      "acceptance": "Producer lobby, display names, device health, private/group messages, and permissioned controls"
+    },
+    {
+      "id": "RC-004",
+      "priority": "P0",
+      "phase": 3,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "SW-001"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Keyboard and mouse shortcuts",
+      "acceptance": "Global/local scopes, chords, dynamic input/value targets, templates, conflict detection, and import/export"
+    },
+    {
+      "id": "RC-005",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-004"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "MIDI, OSC, HID/controller and jog-shuttle input",
+      "acceptance": "Buttons, faders, knobs, velocity/range mapping, learn mode, reconnect, and device profiles"
+    },
+    {
+      "id": "RC-006",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-005"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Activators/tally feedback",
+      "acceptance": "Program/preview/overlay/record/stream/audio state drives lights, motor faders, OSC, network, and GPIO adapters"
+    },
+    {
+      "id": "RC-007",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "studio-web-ux",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-008"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Web controller",
+      "acceptance": "Responsive shortcuts, switcher, tally, title editor, audio subset, replay subset, and role-based layouts"
+    },
+    {
+      "id": "RC-008",
+      "priority": "P0",
+      "phase": 1,
+      "owner": "engine-control-persistence-security",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "HTTP/WebSocket API",
+      "acceptance": "Version discovery, commands, snapshots, event subscriptions, idempotency, authentication, and rate limits"
+    },
+    {
+      "id": "RC-009",
+      "priority": "P2",
+      "phase": 9,
+      "owner": "engine-control-persistence-security",
+      "status": "planned",
+      "exactIntegration": true,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-008"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "vMix API compatibility adapter",
+      "acceptance": "Full documented vMix 29 HTTP function/state XML plus persistent TCP command, tally, and activator subscription semantics map to stable FreeMix behavior; extensions are separately namespaced"
+    },
+    {
+      "id": "RC-010",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-008"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Macros and scripts",
+      "acceptance": "Typed command sequences, conditions, timers, retries, variables, cancellation, permissions, and execution log"
+    },
+    {
+      "id": "RC-011",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-010"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Sandboxed scripting",
+      "acceptance": "Wasm component or similarly isolated runtime; no ambient filesystem/network; declared capabilities"
+    },
+    {
+      "id": "RC-012",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "engine-control-persistence-security",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "IN-026"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Project presets and bundles",
+      "acceptance": "Save/open/append, autosave, media relink, portable bundle, templates, and recent projects"
+    },
+    {
+      "id": "RC-013",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "engine-control-persistence-security",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-012"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Import/export settings",
+      "acceptance": "Merge strategy, preview changes, conflict report, secrets excluded or separately encrypted"
+    },
+    {
+      "id": "RC-014",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "studio-web-ux",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-007"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Tally and web monitor",
+      "acceptance": "Phone tally, low-latency preview, labels, full-screen mode, reconnect, and role-limited shortcuts"
+    },
+    {
+      "id": "RC-015",
+      "priority": "P1",
+      "phase": 4,
+      "owner": "engine-control-persistence-security",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-008"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Statistics and alerts",
+      "acceptance": "FPS, drops, sync, queues, GPU/CPU/disk/network, input/output health, hardware encoder session inventory/capacity, thresholds, notifications, and support bundle"
+    },
+    {
+      "id": "RC-016",
+      "priority": "P2",
+      "phase": 9,
+      "owner": "studio-web-ux",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-007"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Localized UI",
+      "acceptance": "Extracted catalogs, runtime language switch where practical, locale-safe numbers/dates, and RTL-readiness"
+    },
+    {
+      "id": "RC-017",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "graphics-data-automation-plugins",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [
+        "RC-010"
+      ],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Per-input programmable GO",
+      "acceptance": "An input button runs a previewable ordered action list such as preview/take, play, overlay, data update, delay, and follow-up"
+    },
+    {
+      "id": "RC-018",
+      "priority": "P1",
+      "phase": 5,
+      "owner": "studio-web-ux",
+      "status": "planned",
+      "exactIntegration": false,
+      "testsPresent": true,
+      "dependencies": [],
+      "area": "Remote guests, control, automation, and operations",
+      "capability": "Discoverable operator UI",
+      "acceptance": "Simple defaults with progressive disclosure for advanced controls; every control explains itself on hover (what it does, its shortcut, and why it is disabled) in every shipped language"
+    }
+  ]
+}

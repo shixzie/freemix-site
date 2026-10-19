@@ -1,0 +1,178 @@
+---
+import Base from '../../layouts/Base.astro';
+import { PHASES, STATUS_LABEL, phaseStats, features, totals, generatedFrom, AREAS } from '../../data/roadmap';
+import { REPO, url } from '../../data/site';
+
+const groups = [
+  { status: 'delivered', label: 'Delivered', phases: PHASES.filter((p) => p.status === 'delivered') },
+  { status: 'building', label: 'Building now', phases: PHASES.filter((p) => p.status === 'building') },
+  { status: 'groundwork', label: 'Groundwork laid', phases: PHASES.filter((p) => p.status === 'groundwork' || p.status === 'ongoing') },
+  { status: 'planned', label: 'Later', phases: PHASES.filter((p) => p.status === 'planned') },
+];
+const areaColor = (a: string) => AREAS[a]?.color ?? 'var(--text-3)';
+---
+<Base title="Roadmap · FreeMix" description="The FreeMix implementation roadmap: ten phases from a simulated engine to full vMix-class parity and release certification." current="roadmap">
+  <section class="rm-hero">
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Roadmap</span>
+      <h1 class="split">From one frame<br />to full parity.</h1>
+      <p class="lede" data-reveal style="--i: 3">
+        FreeMix ships in vertical slices. Every phase has to work end to end, from source to screen to recording, before the next one adds breadth.
+        This page follows the project's implementation roadmap and its machine-checked parity ledger.
+      </p>
+      <div class="legend" data-reveal style="--i: 5">
+        {(['delivered', 'building', 'groundwork', 'planned'] as const).map((s) => <span class={`st ${s}`}><i></i>{STATUS_LABEL[s]}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap now" aria-label="Where things stand">
+    {groups.map((g, gi) => (
+      <div class={`now-col ${g.status}`} data-reveal style={`--i:${gi}`}>
+        <h2 class="mono">{g.label}</h2>
+        <ul>
+          {g.phases.map((p) => (
+            <li><a href={`#phase-${p.n}`}><span class="mono">{String(p.n).padStart(2, '0')}</span>{p.title}</a></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <section class="wrap timeline" data-scroll="through">
+    <div class="spine" aria-hidden="true"><div class="spine-fill"></div></div>
+    {PHASES.map((p) => {
+      const s = phaseStats(p.n);
+      const rows = features.filter((f) => f.phase === p.n);
+      return (
+        <article class={`phase ${p.status}`} id={`phase-${p.n}`} data-reveal>
+          <div class="node" aria-hidden="true"></div>
+          <div class="phase-num" aria-hidden="true">{String(p.n).padStart(2, '0')}</div>
+          <div class="phase-body">
+            <header>
+              <span class={`st ${p.status}`}><i></i>{STATUS_LABEL[p.status]}</span>
+              <span class="weeks mono">Phase {p.n} · {p.weeks}</span>
+            </header>
+            <h2>{p.title}</h2>
+            <p class="summary">{p.summary}</p>
+            <ul class="goals">{p.goals.map((g) => <li>{g}</li>)}</ul>
+            {p.now && <p class="today"><b class="mono">In the tree today</b>{p.now}</p>}
+            {s.rows > 0 && (
+              <div class="ledger">
+                <div class="ledger-head mono">
+                  <span>{s.rows} ledger {s.rows === 1 ? "row" : "rows"}</span>
+                  <span>{s.tested} with acceptance tests{s.blocked ? ` · ${s.blocked} need licensed SDKs` : ''}</span>
+                </div>
+                <div class="bar" role="img" aria-label={`${s.tested} of ${s.rows} rows have acceptance tests`}>
+                  <i class="tested" style={`--w:${(s.tested / s.rows) * 100}%`}></i>
+                  {s.blocked > 0 && <i class="blocked" style={`--w:${(s.blocked / s.rows) * 100}%`}></i>}
+                </div>
+                <ul class="ids">
+                  {rows.map((f) => (
+                    <li><a href={url(`features/#${f.id}`)} title={f.capability} style={`--c:${areaColor(f.area)}`} class:list={[{ t: f.testsPresent, b: f.status === 'blocked' }]}>{f.id}</a></li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p class="exit"><span class="mono">Exit</span>{p.exit}</p>
+          </div>
+        </article>
+      );
+    })}
+  </section>
+
+  <section class="wrap rm-foot" data-reveal>
+    <p>
+      Durations are the specification's estimates for an experienced team, not release dates. "Acceptance tests" means the ledger row has test files present in the repository; no row is marked complete until it passes on every applicable platform.
+      Ledger snapshot from <a href={`${REPO}/commit/${generatedFrom.commit}`} rel="noopener" class="mono">freemix@{generatedFrom.commit}</a> ({generatedFrom.date}): {totals.rows} rows, {totals.tested} with tests, {totals.blocked} waiting on licensed vendor SDKs.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href={url('features/')}>Browse planned features</a>
+      <a class="btn" href={`${REPO}/blob/master/docs/spec/implementation-roadmap.md`} rel="noopener">Read the full roadmap spec</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .rm-hero { padding-top: clamp(120px, 16vw, 180px); padding-bottom: 48px; position: relative; overflow: hidden; }
+  .rm-hero::before { content: ''; position: absolute; width: 700px; height: 700px; right: -200px; top: -200px; border-radius: 50%; background: radial-gradient(circle, rgba(59, 123, 255, 0.25), transparent 65%); filter: blur(30px); }
+  .rm-hero .wrap { display: grid; gap: 24px; position: relative; }
+  .rm-hero h1 { font-size: clamp(44px, 8vw, 96px); font-weight: 600; letter-spacing: -0.035em; line-height: 0.98; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+
+  .st { display: inline-flex; align-items: center; gap: 8px; font: 600 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-2); }
+  .st i { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--line-2); }
+  .st.delivered { color: var(--pvw); } .st.delivered i { background: var(--pvw); border-color: var(--pvw); box-shadow: 0 0 10px var(--pvw); }
+  .st.building { color: var(--blue-2); } .st.building i { border-color: var(--blue); background: var(--blue); animation: ping 2s var(--ease-out) infinite; }
+  .st.groundwork, .st.ongoing { color: var(--amber); } .st.groundwork i, .st.ongoing i { border-color: var(--amber); }
+  .st.planned { color: var(--text-3); }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(59, 123, 255, 0.6) } 100% { box-shadow: 0 0 0 10px rgba(59, 123, 255, 0) } }
+
+  .now { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: clamp(60px, 10vw, 120px); }
+  .now-col { padding: 20px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--c, var(--line-2)); }
+  .now-col.delivered { --c: var(--pvw); } .now-col.building { --c: var(--blue); } .now-col.groundwork { --c: var(--amber); }
+  .now-col h2 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); font-weight: 600; margin-bottom: 14px; }
+  .now-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .now-col a { text-decoration: none; display: flex; gap: 10px; font-size: 15px; font-weight: 500; transition: color 0.2s, transform 0.3s var(--ease-out); }
+  .now-col a:hover { color: var(--blue-2); transform: translateX(4px); }
+  .now-col a span { color: var(--text-3); font-size: 12px; padding-top: 3px; }
+
+  .timeline { position: relative; display: grid; gap: clamp(56px, 8vw, 96px); padding-bottom: 40px; --spine: 140px; }
+  .spine { position: absolute; left: calc(var(--spine) + 7px); top: 0; bottom: 0; width: 2px; background: var(--line); }
+  .spine-fill { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--pvw), var(--blue) 50%, var(--amber)); transform-origin: top; transform: scaleY(var(--p, 0)); }
+  .phase { position: relative; display: grid; grid-template-columns: var(--spine) 1fr; gap: 0 48px; scroll-margin-top: 100px; }
+  .node { position: absolute; left: calc(var(--spine)); top: 14px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line-2); transition: transform 0.6s var(--ease-spring) 0.2s; transform: scale(0.4); }
+  .phase:global(.is-in) .node, :global(html:not(.js)) .node { transform: scale(1); }
+  .delivered .node { background: var(--pvw); border-color: var(--pvw); box-shadow: 0 0 18px var(--pvw); }
+  .building .node { border-color: var(--blue); background: radial-gradient(circle, var(--blue) 0 35%, var(--bg) 40%); animation: ping 2s var(--ease-out) infinite; }
+  .groundwork .node, .ongoing .node { border-color: var(--amber); }
+  .phase-num { font: 700 clamp(64px, 9vw, 120px)/0.85 var(--font-display); letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1.5px var(--line-2); text-align: right; padding-right: 36px; transition: -webkit-text-stroke-color 0.6s; }
+  .phase:hover .phase-num { -webkit-text-stroke-color: var(--text-3); }
+  .delivered .phase-num { -webkit-text-stroke-color: rgba(34, 197, 94, 0.6); }
+  .building .phase-num { -webkit-text-stroke-color: rgba(122, 165, 255, 0.55); }
+  .phase-body { grid-column: 2; display: grid; gap: 16px; max-width: 760px; }
+  .phase-body header { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+  .weeks { font-size: 12px; color: var(--text-3); }
+  .phase h2 { font-size: clamp(28px, 3.6vw, 40px); }
+  .summary { color: var(--text-2); font-size: 18px; margin: 0; }
+  .goals { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+  .goals li { position: relative; padding-left: 22px; font-size: 15px; color: var(--text-2); }
+  .goals li::before { content: ''; position: absolute; left: 0; top: 9px; width: 10px; height: 2px; background: var(--c, var(--line-2)); }
+  .delivered .goals { --c: var(--pvw); } .building .goals { --c: var(--blue); } .groundwork .goals, .ongoing .goals { --c: var(--amber); }
+  .today { margin: 0; padding: 14px 16px; border-radius: 10px; background: rgba(59, 123, 255, 0.07); border: 1px solid rgba(59, 123, 255, 0.25); color: var(--text); font-size: 15px; display: grid; gap: 6px; }
+  .delivered .today { background: rgba(34, 197, 94, 0.07); border-color: rgba(34, 197, 94, 0.3); }
+  .groundwork .today, .ongoing .today { background: rgba(245, 165, 36, 0.06); border-color: rgba(245, 165, 36, 0.28); }
+  .today b { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); }
+
+  .ledger { display: grid; gap: 10px; }
+  .ledger-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 12px; color: var(--text-3); }
+  .bar { position: relative; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; display: flex; }
+  .bar i { display: block; height: 100%; width: var(--w); transform-origin: left; transform: scaleX(0); transition: transform 1.4s var(--ease-out) 0.3s; }
+  .phase:global(.is-in) .bar i, :global(html:not(.js)) .bar i { transform: scaleX(1); }
+  .bar .tested { background: linear-gradient(90deg, var(--blue), var(--blue-2)); }
+  .bar .blocked { background: repeating-linear-gradient(45deg, var(--amber) 0 4px, transparent 4px 8px); margin-left: auto; transform-origin: right; }
+  .ids { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .ids a { display: inline-block; font: 600 11px/1 var(--font-mono); text-decoration: none; padding: 6px 7px; border-radius: 5px; border: 1px solid var(--line-2); color: var(--text-3); border-left: 3px solid var(--c); transition: color 0.2s, border-color 0.2s, transform 0.3s var(--ease-spring); }
+  .ids a.t { color: var(--text-2); }
+  .ids a.b { border-style: dashed; border-left-style: solid; }
+  .ids a:hover { color: #fff; transform: translateY(-2px); border-color: var(--c); }
+  .exit { margin: 0; font-size: 14px; color: var(--text-2); display: flex; gap: 12px; align-items: baseline; }
+  .exit span { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); flex: none; }
+
+  .rm-foot { padding-block: 40px 120px; display: grid; gap: 24px; }
+  .rm-foot p { color: var(--text-3); font-size: 14px; max-width: 80ch; margin: 0; }
+  .rm-foot a.mono { color: var(--text-2); }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  @media (max-width: 960px) { .now { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 760px) {
+    .timeline { --spine: 0px; padding-left: 34px; }
+    .spine { left: 7px; }
+    .node { left: -34px; }
+    .phase { grid-template-columns: 1fr; }
+    .phase-num { text-align: left; padding: 0; font-size: 56px; margin-bottom: 8px; }
+    .phase-body { grid-column: 1; }
+    .goals { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) { .now { grid-template-columns: 1fr; } }
+</style>
