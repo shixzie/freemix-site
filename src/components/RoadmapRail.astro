@@ -1,0 +1,53 @@
+---
+import { PHASES, STATUS_LABEL, phaseStats } from '../data/roadmap';
+import { url } from '../data/site';
+---
+<ol class="rail" data-reveal data-stagger>
+  {PHASES.map((p) => {
+    const s = phaseStats(p.n);
+    return (
+      <li class={`stop ${p.status}`}>
+        <a href={url(`roadmap/#phase-${p.n}`)}>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="n mono">{String(p.n).padStart(2, '0')}</span>
+          <span class="t">{p.short}</span>
+          <span class="s mono">{STATUS_LABEL[p.status]}</span>
+          {s.rows > 0 && <span class="r mono">{s.rows} {s.rows === 1 ? "row" : "rows"}</span>}
+        </a>
+      </li>
+    );
+  })}
+</ol>
+
+<style>
+  .rail { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(10, 1fr); position: relative; }
+  .rail::before { content: ''; position: absolute; left: 0; right: 0; top: 7px; height: 2px; background: var(--line-2); }
+  .rail::after { content: ''; position: absolute; left: 0; top: 7px; height: 2px; width: 56%; background: linear-gradient(90deg, var(--pvw), var(--blue));
+    transform-origin: left; transform: scaleX(0); transition: transform 1.8s var(--ease-out) 0.3s; }
+  :global(.js) .rail:global(.is-in)::after, :global(html:not(.js)) .rail::after { transform: scaleX(1); }
+  .stop { position: relative; z-index: 1; }
+  .stop a { display: grid; gap: 6px; padding-right: 10px; text-decoration: none; }
+  .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line-2); transition: transform 0.4s var(--ease-spring); }
+  .stop a:hover .dot { transform: scale(1.3); }
+  .delivered .dot { background: var(--pvw); border-color: var(--pvw); box-shadow: 0 0 14px var(--pvw); }
+  .building .dot { border-color: var(--blue); background: radial-gradient(circle, var(--blue) 0 35%, var(--bg) 40%); animation: ping 2s var(--ease-out) infinite; }
+  .ongoing .dot, .groundwork .dot { border-color: var(--amber); }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(59, 123, 255, 0.6) } 100% { box-shadow: 0 0 0 12px rgba(59, 123, 255, 0) } }
+  .n { font-size: 11px; color: var(--text-3); margin-top: 8px; }
+  .t { font-weight: 600; font-size: 15px; line-height: 1.25; }
+  .s { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); }
+  .delivered .s { color: var(--pvw); }
+  .building .s { color: var(--blue-2); }
+  .groundwork .s, .ongoing .s { color: var(--amber); }
+  .r { font-size: 11px; color: var(--text-3); }
+
+  @media (max-width: 900px) {
+    .rail { grid-template-columns: 1fr; gap: 0; padding-left: 4px; }
+    .rail::before, .rail::after { left: 11px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
+    .rail::after { height: 56%; transform: scaleY(0); transform-origin: top; }
+    :global(.js) .rail:global(.is-in)::after { transform: scaleY(1); }
+    .stop a { grid-template-columns: 16px 28px 1fr auto; align-items: center; gap: 12px; padding: 10px 0; }
+    .n { margin: 0; }
+    .r { display: none; }
+  }
+</style>

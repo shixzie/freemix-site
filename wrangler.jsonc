@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "freemix-site",
+  "compatibility_date": "2026-10-01",
+  // Static assets only: no Worker script runs, Cloudflare serves dist/ directly.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": true,
+  "preview_urls": true
+}

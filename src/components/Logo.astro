@@ -1,0 +1,17 @@
+---
+interface Props { size?: number }
+const { size = 22 } = Astro.props;
+---
+<span class="logo" style={`--s:${size}px`}>
+  <span class="mark" aria-hidden="true"><i class="pvw"></i><i class="pgm"></i></span>
+  <span class="word">FREEMIX</span>
+</span>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 10px; font: 700 calc(var(--s) * 0.72)/1 var(--font-display); letter-spacing: 0.22em; }
+  .mark { display: inline-flex; gap: 3px; }
+  .mark i { width: calc(var(--s) * 0.42); height: calc(var(--s) * 0.62); border-radius: 3px; display: block; }
+  .pvw { background: var(--pvw); box-shadow: 0 0 10px rgba(34, 197, 94, 0.55); }
+  .pgm { background: var(--pgm); box-shadow: 0 0 10px rgba(239, 59, 54, 0.6); animation: tally 4s var(--ease-in-out) infinite; }
+  @keyframes tally { 0%, 46%, 54%, 100% { opacity: 1 } 50% { opacity: 0.55 } }
+</style>

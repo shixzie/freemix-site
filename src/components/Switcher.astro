@@ -1,0 +1,369 @@
+---
+import Sources from './Sources.astro';
+const keys = [
+  { t: 'cut', label: 'Cut', k: 'C' },
+  { t: 'fade', label: 'Fade', k: 'F' },
+  { t: 'wipe', label: 'Wipe', k: 'W' },
+  { t: 'slide', label: 'Slide', k: 'S' },
+  { t: 'zoom', label: 'Zoom', k: 'Z' },
+  { t: 'stinger', label: 'Stinger', k: 'T' },
+];
+const inputs = ['stage', 'scene', 'sports', 'bars'];
+---
+<div class="switcher" data-switcher tabindex="0" aria-label="Interactive switcher demo. Pick an input to preview it, then take it with a transition.">
+  <Sources />
+  <div class="sw-top">
+    <span class="sw-show">Evening Broadcast</span>
+    <span class="pill ready"><i></i>Control ready</span>
+    <span class="sw-rev mono">REV <b data-rev>34</b></span>
+    <span class="sw-spacer"></span>
+    <span class="pill rec"><i></i>REC</span>
+    <span class="pill live"><i></i>LIVE</span>
+    <span class="sw-tc mono" aria-hidden="true"><small>UTC</small> <span data-tc>00:00:00:00</span></span>
+  </div>
+
+  <div class="sw-body">
+    <figure class="mon pvw">
+      <figcaption><span class="tag">Preview</span><span data-name="pvw"></span></figcaption>
+      <div class="screen" data-screen="pvw"></div>
+    </figure>
+
+    <div class="trans">
+      <div class="keys" role="group" aria-label="Transitions">
+        {keys.map((k) => (
+          <button type="button" class="key" data-take={k.t} aria-keyshortcuts={k.k}>
+            <span>{k.label}</span><kbd>{k.k}</kbd>
+          </button>
+        ))}
+      </div>
+      <div class="tbar" aria-hidden="true">
+        <div class="tbar-track"><div class="tbar-fill"></div><div class="tbar-handle" data-tbar></div></div>
+        <span class="mono">T-BAR</span>
+      </div>
+      <div class="meters" aria-hidden="true">
+        <div class="meter"><i data-meter></i></div>
+        <div class="meter"><i data-meter></i></div>
+        <span class="mono">MASTER</span>
+      </div>
+    </div>
+
+    <figure class="mon pgm">
+      <figcaption><span class="tag">Program</span><span data-name="pgm"></span></figcaption>
+      <div class="screen" data-screen="pgm"></div>
+    </figure>
+  </div>
+
+  <div class="bank" role="group" aria-label="Inputs">
+    {inputs.map((id, i) => (
+      <button type="button" class="tile" data-input={id} aria-keyshortcuts={String(i + 1)}>
+        <span class="thumb" data-thumb={id}></span>
+        <span class="tile-meta"><span class="num mono">{i + 1}</span><span class="tile-name"></span></span>
+      </button>
+    ))}
+  </div>
+  <p class="hint"><span class="dot"></span>Live demo. Click an input to preview it, then take it to Program. Keys 1–4 preview, C cut, F fade.</p>
+</div>
+
+<style>
+  .switcher {
+    --pad: clamp(10px, 1.4vw, 18px);
+    position: relative;
+    background: linear-gradient(180deg, rgba(22, 26, 34, 0.92), rgba(12, 14, 19, 0.96));
+    border: 1px solid var(--line-2);
+    border-radius: 18px;
+    padding: var(--pad);
+    box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.02) inset, 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    backdrop-filter: blur(10px);
+    outline: none;
+  }
+  .switcher:focus-visible { box-shadow: 0 0 0 2px var(--blue-2), 0 60px 120px -40px rgba(0, 0, 0, 0.9); }
+  .sw-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 2px 4px 12px; font-size: 13px; }
+  .sw-show { font-weight: 600; }
+  .sw-spacer { flex: 1; }
+  .sw-rev { color: var(--text-3); font-size: 12px; }
+  .sw-rev b { color: var(--text-2); font-weight: 600; display: inline-block; }
+  .sw-tc { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+  .sw-tc small { color: var(--text-3); font-size: 10px; letter-spacing: 0.1em; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font: 700 10.5px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 8px; border-radius: 6px; border: 1px solid; }
+  .pill i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .ready { color: var(--pvw); border-color: rgba(34, 197, 94, 0.4); }
+  .rec { color: #fff; background: var(--pgm); border-color: var(--pgm); }
+  .rec i { animation: blink 1.2s steps(2, jump-none) infinite; }
+  .live { color: var(--amber); border-color: rgba(245, 165, 36, 0.5); }
+  @keyframes blink { 50% { opacity: 0.2 } }
+  @media (max-width: 640px) { .ready, .sw-rev { display: none; } }
+
+  .sw-body { display: grid; grid-template-columns: 1fr minmax(150px, 0.34fr) 1fr; gap: var(--pad); align-items: stretch; }
+  .mon { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .mon figcaption { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--text-2); min-width: 0; }
+  .mon figcaption span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tag { font: 700 10.5px/1 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 7px; border-radius: 4px; color: #fff; }
+  .pvw .tag { background: #15803d; }
+  .pgm .tag { background: #c62824; }
+  .screen { position: relative; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background: #000; isolation: isolate; }
+  .pvw .screen { box-shadow: 0 0 0 2px var(--pvw), 0 0 30px -6px rgba(34, 197, 94, 0.5); }
+  .pgm .screen { box-shadow: 0 0 0 2px var(--pgm), 0 0 40px -6px rgba(239, 59, 54, 0.55); }
+  .pgm .screen.flash { animation: flash 0.5s var(--ease-out); }
+  @keyframes flash { from { box-shadow: 0 0 0 4px #ff8a86, 0 0 70px 0 rgba(239, 59, 54, 0.9); } }
+  :global(.screen .layer) { position: absolute; inset: 0; }
+
+  .trans { display: grid; grid-template-columns: 1fr auto auto; grid-template-rows: auto 1fr; gap: 10px; padding-top: 25px; }
+  .keys { grid-column: 1; grid-row: 1 / -1; display: grid; grid-template-columns: 1fr; gap: 6px; align-content: start; }
+  .key {
+    display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    padding: 9px 10px; border-radius: 8px; border: 1px solid var(--line-2);
+    background: linear-gradient(180deg, #1b2029, #14181f); color: var(--text);
+    font: 600 12.5px/1 var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
+    transition: transform 0.25s var(--ease-spring), border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+  .key kbd { font: 500 10px/1 var(--font-mono); color: var(--text-3); border: 1px solid var(--line-2); border-radius: 4px; padding: 3px 4px; }
+  .key:hover { border-color: var(--text-3); transform: translateY(-1px); }
+  .key:active { transform: scale(0.97); }
+  .key.on { border-color: var(--blue); background: linear-gradient(180deg, #24448a, #1a3270); box-shadow: 0 0 22px -6px var(--blue); }
+  .key.on kbd { color: #cfe0ff; border-color: rgba(255,255,255,0.3); }
+  .key[data-take='cut'] { color: #ffd9d7; }
+  .tbar, .meters { grid-row: 1 / -1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .tbar span, .meters span { font-size: 9px; letter-spacing: 0.12em; color: var(--text-3); writing-mode: vertical-rl; transform: rotate(180deg); }
+  .tbar-track { position: relative; flex: 1; width: 10px; border-radius: 6px; background: #07080b; border: 1px solid var(--line-2); min-height: 120px; }
+  .tbar-fill { position: absolute; inset: 0; border-radius: 6px; background: linear-gradient(to bottom, var(--blue), transparent); opacity: 0; transition: opacity 0.3s; }
+  .switcher.busy .tbar-fill { opacity: 0.5; }
+  .tbar-handle { position: absolute; left: 50%; top: 0; width: 34px; height: 16px; margin-left: -17px; border-radius: 4px;
+    background: linear-gradient(180deg, #e8ecf3, #9aa3b4); box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 -2px 0 rgba(0,0,0,0.25);
+    transform: translateY(calc(var(--t, 0) * (var(--track, 120px) - 16px))); }
+  .tbar-handle::after { content: ''; position: absolute; left: 6px; right: 6px; top: 7px; height: 2px; background: #5b6474; border-radius: 1px; }
+  .meters { flex-direction: column; }
+  .meters { display: grid; grid-template-columns: 6px 6px; grid-template-rows: 1fr auto; column-gap: 3px; row-gap: 8px; justify-items: center; align-items: stretch; }
+  .meters span { grid-column: 1 / -1; }
+  .meter { position: relative; width: 6px; border-radius: 2px; background: #07080b; overflow: hidden; min-height: 120px; }
+  .meter i { position: absolute; inset: 0; transform-origin: bottom; transform: scaleY(0.4);
+    background: linear-gradient(to top, #16a34a 0 62%, #eab308 62% 84%, #ef4444 84%); }
+
+  .bank { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--pad); margin-top: var(--pad); }
+  .tile { position: relative; padding: 0; border: 0; background: var(--panel); border-radius: 8px; cursor: pointer; text-align: left; color: var(--text);
+    box-shadow: 0 0 0 1px var(--line-2); transition: transform 0.35s var(--ease-spring), box-shadow 0.25s; overflow: hidden; }
+  .tile:hover { transform: translateY(-3px); }
+  .tile.is-pvw { box-shadow: 0 0 0 2px var(--pvw); }
+  .tile.is-pgm { box-shadow: 0 0 0 2px var(--pgm); }
+  .thumb { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; }
+  .tile::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px; z-index: 2; background: transparent; transition: background 0.2s; }
+  .tile.is-pvw::before { background: var(--pvw); }
+  .tile.is-pgm::before { background: var(--pgm); }
+  .tile-meta { display: flex; align-items: center; gap: 8px; padding: 7px 9px; font-size: 12.5px; }
+  .num { font-size: 10px; color: var(--text-3); border: 1px solid var(--line-2); border-radius: 4px; padding: 2px 5px; }
+  .tile-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hint { margin: 14px 4px 2px; font-size: 13px; color: var(--text-3); display: flex; gap: 10px; align-items: center; }
+  .hint .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pvw); box-shadow: 0 0 10px var(--pvw); flex: none; animation: blink 1.6s ease-in-out infinite; }
+
+  /* Stinger wipe band */
+  :global(.stinger-band) { position: absolute; inset: -20% -60%; z-index: 5; pointer-events: none;
+    background: linear-gradient(100deg, transparent 30%, #3b7bff 30% 40%, #9b6bff 40% 52%, #ef3b36 52% 60%, transparent 60%); }
+
+  @media (max-width: 860px) {
+    .sw-body { grid-template-columns: 1fr 1fr; }
+    .trans { grid-column: 1 / -1; grid-row: 2; display: block; padding-top: 0; }
+    .keys { grid-template-columns: repeat(6, 1fr); }
+    .key { justify-content: center; padding: 10px 4px; font-size: 11px; }
+    .key kbd, .tbar, .meters { display: none; }
+  }
+  @media (max-width: 520px) {
+    .keys { grid-template-columns: repeat(3, 1fr); }
+    .bank { grid-template-columns: repeat(2, 1fr); }
+    .hint { font-size: 12px; }
+  }
+</style>
+
+<script>
+  type Take = 'cut' | 'fade' | 'wipe' | 'slide' | 'zoom' | 'stinger';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-switcher]')) {
+    const tpl = (id: string) => root.querySelector<HTMLTemplateElement>(`template[data-source="${id}"]`)!;
+    const nameOf = (id: string) => tpl(id).dataset.name ?? id;
+    const make = (id: string) => {
+      const layer = document.createElement('div');
+      layer.className = 'layer';
+      layer.append(tpl(id).content.cloneNode(true));
+      return layer;
+    };
+    const pvwScreen = root.querySelector<HTMLElement>('[data-screen="pvw"]')!;
+    const pgmScreen = root.querySelector<HTMLElement>('[data-screen="pgm"]')!;
+    const tiles = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-input]'));
+    const ids = tiles.map((t) => t.dataset.input!);
+    const keys = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-take]'));
+    const handle = root.querySelector<HTMLElement>('[data-tbar]')!;
+    const revEl = root.querySelector<HTMLElement>('[data-rev]')!;
+
+    for (const t of tiles) {
+      t.querySelector('[data-thumb]')!.append(make(t.dataset.input!));
+      t.querySelector('.tile-name')!.textContent = nameOf(t.dataset.input!);
+    }
+
+    let pgm = 'stage';
+    let pvw = 'scene';
+    let busy = false;
+    let tbarAtEnd = false;
+    let rev = 34;
+
+    const setScreen = (screen: HTMLElement, id: string) => screen.replaceChildren(make(id));
+    const paint = () => {
+      root.querySelector('[data-name="pvw"]')!.textContent = nameOf(pvw);
+      root.querySelector('[data-name="pgm"]')!.textContent = nameOf(pgm);
+      for (const t of tiles) {
+        t.classList.toggle('is-pgm', t.dataset.input === pgm);
+        t.classList.toggle('is-pvw', t.dataset.input === pvw);
+        t.setAttribute('aria-pressed', String(t.dataset.input === pvw));
+      }
+    };
+    const bump = () => {
+      revEl.textContent = String(++rev);
+      revEl.animate([{ transform: 'translateY(-60%)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 380, easing: 'cubic-bezier(.16,1,.3,1)' });
+    };
+    setScreen(pvwScreen, pvw);
+    setScreen(pgmScreen, pgm);
+    paint();
+
+    const preview = (id: string) => {
+      if (busy || id === pvw) return;
+      if (id === pgm) return;
+      pvw = id;
+      const layer = make(id);
+      pvwScreen.append(layer);
+      layer.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160 }).finished.then(() => pvwScreen.replaceChildren(layer));
+      bump();
+      paint();
+    };
+
+    const take = async (type: Take) => {
+      if (busy) return;
+      busy = true;
+      root.classList.add('busy');
+      keys.forEach((k) => k.classList.toggle('on', k.dataset.take === type));
+      const effective: Take = reduced ? 'cut' : type;
+      const dur = effective === 'cut' ? 0 : effective === 'stinger' ? 1100 : 750;
+      const old = pgmScreen.firstElementChild as HTMLElement;
+      const next = make(pvw);
+      pgmScreen.append(next);
+      const ease = 'cubic-bezier(.65,0,.35,1)';
+      const opts: KeyframeAnimationOptions = { duration: dur, easing: ease, fill: 'both' };
+      const anims: Animation[] = [];
+
+      const from = tbarAtEnd ? 1 : 0;
+      const to = 1 - from;
+      handle.style.setProperty('--track', `${handle.parentElement!.clientHeight}px`);
+      if (dur) {
+        anims.push(handle.animate([{ '--t': from } as Keyframe, { '--t': to } as Keyframe], opts));
+        // Fallback for engines without registered custom properties: move with transform directly.
+        handle.style.setProperty('--t', String(to));
+      } else {
+        handle.style.setProperty('--t', String(to));
+      }
+
+      switch (effective) {
+        case 'fade':
+          anims.push(next.animate([{ opacity: 0 }, { opacity: 1 }], opts));
+          break;
+        case 'wipe':
+          anims.push(next.animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)' }], opts));
+          break;
+        case 'slide':
+          anims.push(old.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-100%)' }], opts));
+          anims.push(next.animate([{ transform: 'translateX(100%)' }, { transform: 'translateX(0)' }], opts));
+          break;
+        case 'zoom':
+          anims.push(old.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(1.6)', opacity: 0 }], opts));
+          anims.push(next.animate([{ transform: 'scale(0.4)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }], { ...opts, easing: 'cubic-bezier(.16,1,.3,1)' }));
+          break;
+        case 'stinger': {
+          // The band covers the frame; the cut happens under it at the cut point.
+          const band = document.createElement('div');
+          band.className = 'stinger-band';
+          pgmScreen.append(band);
+          next.style.opacity = '0';
+          anims.push(band.animate([{ transform: 'translateX(-110%) skewX(-8deg)' }, { transform: 'translateX(110%) skewX(-8deg)' }], { duration: dur, easing: 'cubic-bezier(.7,0,.3,1)' }));
+          setTimeout(() => (next.style.opacity = '1'), dur * 0.48);
+          anims[anims.length - 1].finished.then(() => band.remove());
+          break;
+        }
+      }
+      await Promise.all(anims.map((a) => a.finished.catch(() => {})));
+      anims.forEach((a) => a.cancel());
+      handle.style.setProperty('--t', String(to));
+      tbarAtEnd = !tbarAtEnd;
+      old.remove();
+      pgmScreen.classList.remove('flash');
+      void pgmScreen.offsetWidth;
+      pgmScreen.classList.add('flash');
+
+      // Like the studio, the outgoing Program becomes the new Preview.
+      [pgm, pvw] = [pvw, pgm];
+      setScreen(pvwScreen, pvw);
+      bump();
+      paint();
+      root.classList.remove('busy');
+      busy = false;
+    };
+
+    // Autoplay a show until the visitor takes over.
+    const order: Take[] = ['fade', 'wipe', 'stinger', 'slide', 'zoom', 'cut'];
+    let step = 0;
+    let idleUntil = 0;
+    let visible = true;
+    const user = () => (idleUntil = performance.now() + 12000);
+    const loop = async () => {
+      if (!reduced && visible && !document.hidden && !busy && performance.now() > idleUntil) {
+        const choices = ids.filter((id) => id !== pgm && id !== pvw);
+        preview(choices[step % choices.length]);
+        await new Promise((r) => setTimeout(r, 900));
+        if (performance.now() > idleUntil) await take(order[step % order.length]);
+        step++;
+      }
+      setTimeout(loop, 2200);
+    };
+    new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(root);
+    setTimeout(loop, 1800);
+
+    tiles.forEach((t) => t.addEventListener('click', () => { user(); preview(t.dataset.input!); }));
+    keys.forEach((k) => k.addEventListener('click', () => { user(); take(k.dataset.take as Take); }));
+
+    let hovered = false;
+    root.addEventListener('pointerenter', () => (hovered = true));
+    root.addEventListener('pointerleave', () => (hovered = false));
+    const map: Record<string, Take> = { c: 'cut', f: 'fade', w: 'wipe', s: 'slide', z: 'zoom', t: 'stinger' };
+    addEventListener('keydown', (e) => {
+      if (!(hovered || root.contains(document.activeElement)) || e.metaKey || e.ctrlKey || e.altKey) return;
+      const k = e.key.toLowerCase();
+      const n = Number(k);
+      if (n >= 1 && n <= ids.length) { user(); preview(ids[n - 1]); e.preventDefault(); }
+      else if (map[k]) { user(); take(map[k]); e.preventDefault(); }
+    });
+
+    // Timecode and match clock.
+    const tc = root.querySelector<HTMLElement>('[data-tc]')!;
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const t0 = performance.now();
+    const m0 = 72 * 60 + 14;
+    const tick = () => {
+      const d = new Date();
+      const ff = Math.floor((d.getMilliseconds() / 1000) * 30);
+      tc.textContent = `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}:${pad(ff)}`;
+      const s = m0 + Math.floor((performance.now() - t0) / 1000);
+      const clock = `${pad(Math.floor(s / 60))}:${pad(s % 60)}`;
+      root.querySelectorAll('[data-clock]').forEach((c) => (c.textContent = clock));
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+
+    // Master meters: smoothed noise with fast attack and slow release.
+    const meters = Array.from(root.querySelectorAll<HTMLElement>('[data-meter]'));
+    const lv = meters.map(() => 0.4);
+    setInterval(() => {
+      if (reduced || !visible) return;
+      const base = 0.45 + Math.sin(performance.now() / 700) * 0.15;
+      meters.forEach((m, i) => {
+        const target = Math.min(0.98, base + Math.random() * 0.35);
+        lv[i] = target > lv[i] ? target : lv[i] * 0.9 + target * 0.1;
+        m.style.transform = `scaleY(${lv[i].toFixed(3)})`;
+      });
+    }, 70);
+  }
+</script>
