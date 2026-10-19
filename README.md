@@ -37,9 +37,10 @@ npm run preview   # build, then serve through wrangler locally on :8787
 npm run deploy    # build, then wrangler deploy (needs `npx wrangler login` once)
 ```
 
-Pushes to `master` deploy automatically through `.github/workflows/deploy.yml`. It needs two repository secrets:
+Production deploys run on [Cloudflare Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/), connected to this repository in the Cloudflare dashboard with:
 
-- `CLOUDFLARE_API_TOKEN`: an API token with the **Edit Cloudflare Workers** template permissions
-- `CLOUDFLARE_ACCOUNT_ID`: the account ID from the Cloudflare dashboard
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+- Production branch: `master`
 
-Set the optional repository variable `SITE_URL` (for example `https://freemix.example`) once a custom domain is attached to the Worker, and add the domain under the Worker's **Settings → Domains & Routes** or as a `routes` entry in `wrangler.jsonc`.
+The Worker name in Cloudflare must match `name` in `wrangler.jsonc` (`freemix-site`). Set a `SITE` build variable to the public origin (for example `https://freemix.example`) once a custom domain is attached under the Worker's **Settings → Domains & Routes**.
