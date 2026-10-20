@@ -11,5 +11,8 @@
   // The freemix.studio zone must be on the same Cloudflare account.
   "routes": [{ "pattern": "freemix.studio", "custom_domain": true }],
   "workers_dev": true,
-  "preview_urls": true
+  "preview_urls": true,
+  // Worker Previews for non-master branches (Workers Builds runs `wrangler preview`).
+  // Static assets only, so previews need no settings beyond the top-level ones.
+  "previews": {}
 }

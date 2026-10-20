@@ -26,6 +26,8 @@ npm run build    # static output in dist/
 FREEMIX_DIR=../freemix npm run sync
 ```
 
+The "Recent progress" list on `/roadmap/` lives in `src/data/updates.ts`, one entry per sync, newest first.
+
 Phase titles, summaries and status live in `src/data/roadmap.ts`, condensed from `docs/spec/implementation-roadmap.md`. Screenshots in `src/assets/screens/` come from `docs/progress/` in the FreeMix repository.
 
 ## Deploy
