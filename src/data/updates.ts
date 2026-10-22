@@ -10,6 +10,18 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: '2026-10-22',
+    range: 'afe5b41..64afb29',
+    title: 'Pro audio, new input types and a browser title editor',
+    items: [
+      'Every audio strip and the Master bus now have their own FX chain: EQ with a curve view, gate, compressor, expander, limiter and a sample-accurate delay, plus EBU R128 loudness and true-peak meters. Live cameras and capture devices are drift-corrected to the show clock, so sound and picture stay in sync over long shows.',
+      'New inputs: media lists that play gaplessly with shuffle, loop and their own transitions, still images and slideshows, PDFs and slide decks with presenter notes, and screen or window capture with its audio, including Wayland on Linux.',
+      'Keying gains key/fill and alpha keys, light wrap, polygon garbage mattes, a perceptual chroma key and one-click auto key from the input’s own picture.',
+      'Phones and tablets now pair with the show over a TLS web gateway on the venue network. From the browser, a graphics operator can edit titles at /titles, and the operator page can adjust strip FX, reset loudness and fire shortcuts.',
+      'Project shortcuts can use chords, mouse buttons and OSC, target whatever is on Preview or Program, and export as .fmshortcuts files. Studio’s health strip shows the engine’s CPU, GPU and alerts.',
+    ],
+  },
+  {
     date: '2026-10-19',
     range: '1c841b0..afe5b41',
     title: 'See what a cue does before you press GO',
