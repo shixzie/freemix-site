@@ -39,7 +39,7 @@ const features = ledger.features.map((f) => {
 
 const git = (...args) => execFileSync('git', ['-C', root, ...args], { encoding: 'utf8' }).trim();
 // The newest commit that names a protocol version; most commits don't change it.
-const protocol = git('log', '-500', '--format=%s').match(/protocol (\d+\.\d+)/)?.[1] ?? null;
+const protocol = git('log', '-500', '--format=%s').match(/protocol (\d+\.\d+)/i)?.[1] ?? null;
 const tracked = git('ls-files').split('\n');
 const rustLines = tracked
   .filter((f) => f.endsWith('.rs'))

@@ -10,6 +10,17 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: '2026-10-26',
+    range: '64afb29..c9e426c',
+    title: 'Instant replay and highlight reels',
+    items: [
+      'Instant replay works end to end: up to four inputs record into rolling segment files, an operator marks or captures the last 5, 10 or 20 events, and any angle plays back through a Replay input from a new Replay panel in Studio or from the command line. Replay audio, A/B linking and jog or shuttle are still to come.',
+      'Highlight reels of up to 64 clips, each with its own trims and 25 to 100 percent speed, are edited in the Replay panel and exported to an H.264 MP4 with progress and cancel.',
+      'Studio’s health strip now also warns about network trouble, sources drifting out of sync and encoders running out of headroom.',
+      'Project shortcuts can be scoped to a single Studio tool window or pop-out.',
+    ],
+  },
+  {
     date: '2026-10-22',
     range: 'afe5b41..64afb29',
     title: 'Pro audio, new input types and a browser title editor',

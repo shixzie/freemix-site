@@ -76,10 +76,10 @@ export const PHASES: Phase[] = [
     exit: 'Remote Show scenario passes with eight guests.',
   },
   {
-    n: 7, title: 'Replay and sports', short: 'Replay', weeks: '14–20 weeks', status: 'groundwork',
+    n: 7, title: 'Replay and sports', short: 'Replay', weeks: '14–20 weeks', status: 'building',
     summary: 'Eight-camera instant replay with marks, A/B channels, highlights and export during record.',
     goals: ['Rolling segment storage per camera', 'Synchronised eight-source recording', 'Events, marks, tags and lists', 'Replay A/B, jog, shuttle and variable speed', 'Quad view, highlight reels and music beds'],
-    now: 'The replay catalogue, angle resolution, highlight timeline and disk prediction are modelled; decoding and presentation are next.',
+    now: 'Up to four inputs record into rolling segments, captured events play back through Replay inputs from a Studio Replay panel, and highlight reels export to MP4. Replay audio, A/B linking, jog and shuttle are next.',
     exit: 'Sports Show scenario passes on certified storage.',
   },
   {
