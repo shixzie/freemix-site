@@ -1,13 +1,13 @@
 {
   "generatedFrom": {
-    "commit": "afe5b41",
-    "date": "2026-10-19",
-    "protocol": "2.67"
+    "commit": "c9e426ce",
+    "date": "2026-10-25",
+    "protocol": "2.108"
   },
   "stats": {
-    "crates": 58,
+    "crates": 59,
     "apps": 7,
-    "rustLines": 713624
+    "rustLines": 880672
   },
   "features": [
     {
@@ -73,7 +73,7 @@
       "owner": "audio-dsp",
       "status": "planned",
       "exactIntegration": false,
-      "testsPresent": false,
+      "testsPresent": true,
       "dependencies": [
         "IN-003",
         "AU-003"
@@ -95,7 +95,7 @@
       ],
       "area": "Inputs and source management",
       "capability": "Media List input",
-      "acceptance": "Mixed audio/video/M3U list supports order, search, shuffle, Auto Next/Auto First, next/previous, loop, per-item marks, and active-item events"
+      "acceptance": "Mixed audio/video/M3U list supports order, search, shuffle, Auto Next/Auto First, next/previous, loop, per-item marks, and active-item events; every item's file length is probed by the server and shown as its out point and in the list's total duration; each list has its own transition between items (cut, fade, dip, or wipe with a length) on Auto Next and Next"
     },
     {
       "id": "IN-007",
@@ -162,13 +162,13 @@
       "owner": "platform-professional-hardware",
       "status": "planned",
       "exactIntegration": false,
-      "testsPresent": false,
+      "testsPresent": true,
       "dependencies": [
         "IN-026"
       ],
       "area": "Inputs and source management",
       "capability": "Local display/window/application capture with optional audio",
-      "acceptance": "Enumerate targets, crop, cursor toggle, and survive resize/target closure"
+      "acceptance": "Enumerate targets, crop, cursor toggle, and survive resize/target closure (Linux X11 implemented; Windows/macOS compile-checked; Linux Wayland through xdg-desktop-portal and PipeWire loaded at run time (system audio, no application audio); optional system or per-application audio on the input's own strip, Linux PulseAudio tested, Windows WASAPI and macOS ScreenCaptureKit audio compile-checked)"
     },
     {
       "id": "IN-012",
@@ -207,7 +207,7 @@
       "owner": "graphics-data-automation-plugins",
       "status": "planned",
       "exactIntegration": false,
-      "testsPresent": false,
+      "testsPresent": true,
       "dependencies": [
         "IN-008"
       ],
@@ -489,7 +489,7 @@
       "owner": "gpu-compositor-color",
       "status": "planned",
       "exactIntegration": false,
-      "testsPresent": false,
+      "testsPresent": true,
       "dependencies": [
         "SW-002",
         "IN-010"
@@ -578,7 +578,7 @@
       "owner": "gpu-compositor-color",
       "status": "planned",
       "exactIntegration": false,
-      "testsPresent": false,
+      "testsPresent": true,
       "dependencies": [
         "SW-007"
       ],
