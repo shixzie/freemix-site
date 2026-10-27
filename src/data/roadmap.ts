@@ -79,7 +79,7 @@ export const PHASES: Phase[] = [
     n: 7, title: 'Replay and sports', short: 'Replay', weeks: '14–20 weeks', status: 'building',
     summary: 'Eight-camera instant replay with marks, A/B channels, highlights and export during record.',
     goals: ['Rolling segment storage per camera', 'Synchronised eight-source recording', 'Events, marks, tags and lists', 'Replay A/B, jog, shuttle and variable speed', 'Quad view, highlight reels and music beds'],
-    now: 'Up to four inputs record into rolling segments, captured events play back through Replay inputs from a Studio Replay panel, and highlight reels export to MP4. Replay audio, A/B linking, jog and shuttle are next.',
+    now: 'Up to four inputs record picture and sound into rolling segments, captured events play back and jog frame by frame through Replay inputs, and highlight reels with dissolves and a music bed export to MP4. A/B linking, shuttle and replay playlists are next.',
     exit: 'Sports Show scenario passes on certified storage.',
   },
   {

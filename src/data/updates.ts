@@ -10,6 +10,18 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: '2026-10-27',
+    range: 'c9e426c..775eb1a',
+    title: 'Replay with sound, MIDI control and key profiles',
+    items: [
+      'Instant replays now record and play their source audio, a cued replay can be jogged frame by frame, and a finished replay can hand Program back to the live source on its own.',
+      'Highlight reels gain dissolves between clips, a music bed, recorded audio and a free-space check before exporting a web-ready MP4.',
+      'Studio can drive console actions from a MIDI controller, and keyboard layouts come as key profiles, with FreeMix and vMix styles built in and .fmkeys import and export.',
+      'Health alerts can be acknowledged and silenced from Studio, the command line or the web operator page, and each show can set its own alert rules. The operator page also gains per-strip Program meters.',
+      'A deinterlace layer effect and feathered garbage mattes join the video tools.',
+    ],
+  },
+  {
     date: '2026-10-26',
     range: '64afb29..c9e426c',
     title: 'Instant replay and highlight reels',
