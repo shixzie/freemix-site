@@ -1,13 +1,13 @@
 {
   "generatedFrom": {
-    "commit": "775eb1a8",
-    "date": "2026-10-27",
-    "protocol": "2.117"
+    "commit": "37d6b667",
+    "date": "2026-10-30",
+    "protocol": "2.125"
   },
   "stats": {
-    "crates": 59,
+    "crates": 60,
     "apps": 7,
-    "rustLines": 893572
+    "rustLines": 904634
   },
   "features": [
     {
@@ -28,15 +28,15 @@
       "priority": "P1",
       "phase": 8,
       "owner": "platform-professional-hardware",
-      "status": "blocked",
-      "exactIntegration": true,
+      "status": "planned",
+      "exactIntegration": false,
       "testsPresent": false,
       "dependencies": [
         "IN-001"
       ],
       "area": "Inputs and source management",
-      "capability": "Vendor capture adapters: Blackmagic, AJA, Magewell-class UVC, Bluefish444 where SDK permits",
-      "acceptance": "Adapter capability tests cover embedded audio, timecode, genlock status, and supported pixel formats"
+      "capability": "Vendor capture adapters through the FreeMix capture SDK: Blackmagic, AJA, Magewell-class UVC, Bluefish444",
+      "acceptance": "Adapters implement the versioned FreeMix capture SDK; capability tests cover embedded audio, timecode, genlock status, and supported pixel formats; the portable workspace builds without any vendor SDK"
     },
     {
       "id": "IN-003",
@@ -265,14 +265,14 @@
       "priority": "P1",
       "phase": 8,
       "owner": "platform-professional-hardware",
-      "status": "blocked",
-      "exactIntegration": true,
+      "status": "planned",
+      "exactIntegration": false,
       "testsPresent": false,
       "dependencies": [
         "IN-001"
       ],
       "area": "Inputs and source management",
-      "capability": "NDI send/receive and discovery, including alpha where licensed",
+      "capability": "Open media transport (OMT) send/receive and discovery",
       "acceptance": "Discover, connect, low-bandwidth preview, metadata/tally, alpha, and isolated loss recovery"
     },
     {
@@ -429,15 +429,15 @@
       "priority": "P2",
       "phase": 6,
       "owner": "replay-guests",
-      "status": "blocked",
-      "exactIntegration": true,
+      "status": "planned",
+      "exactIntegration": false,
       "testsPresent": false,
       "dependencies": [
         "RC-001"
       ],
       "area": "Inputs and source management",
-      "capability": "Named Zoom meeting integration",
-      "acceptance": "Authorized SDK adapter joins Meetings/Events/Sessions, searches and assigns multiple participants, exposes camera/share/audio, switches camera/share, provides chat/manager/return feed, and emits active-speaker triggers"
+      "capability": "Open meeting guests",
+      "acceptance": "A browser guest, RTMP/SRT pull, and SIP gateway join without a vendor SDK and expose camera/share/audio, participant selection, chat, and active-speaker triggers"
     },
     {
       "id": "IN-030",
@@ -878,15 +878,15 @@
       "priority": "P2",
       "phase": 9,
       "owner": "graphics-data-automation-plugins",
-      "status": "blocked",
-      "exactIntegration": true,
+      "status": "planned",
+      "exactIntegration": false,
       "testsPresent": true,
       "dependencies": [
         "GX-004"
       ],
       "area": "Titles, graphics, data, and telestration",
       "capability": "Social moderation companion",
-      "acceptance": "Authorized Facebook page comments, Twitch, YouTube Live chat, Bluesky, IRC, and Zoom chat adapters aggregate into a browser approval queue with title mapping, profile media/photos, rotation, and auto-update"
+      "acceptance": "Twitch, YouTube Live chat, Bluesky, IRC, and public Facebook page comments aggregate into a browser approval queue with title mapping, profile media/photos, rotation, and auto-update through each platform's public API"
     },
     {
       "id": "GX-011",
@@ -982,15 +982,15 @@
       "priority": "P1",
       "phase": 8,
       "owner": "audio-dsp",
-      "status": "blocked",
-      "exactIntegration": true,
+      "status": "planned",
+      "exactIntegration": false,
       "testsPresent": false,
       "dependencies": [
         "AU-005"
       ],
       "area": "Audio",
-      "capability": "VST3 plugins where licensed",
-      "acceptance": "Scan, validate, order, bypass, save state, compensate latency, expose editor, and quarantine crashes"
+      "capability": "FreeMix plugins through the in-tree plugin SDK",
+      "acceptance": "Scan, validate, order, bypass, save state, compensate latency, expose editor, and quarantine crashes through the versioned FreeMix plugin ABI; no VST3 license or host is required"
     },
     {
       "id": "AU-007",
@@ -1177,31 +1177,31 @@
       "priority": "P1",
       "phase": 8,
       "owner": "platform-professional-hardware",
-      "status": "blocked",
-      "exactIntegration": true,
+      "status": "planned",
+      "exactIntegration": false,
       "testsPresent": false,
       "dependencies": [
         "SW-012"
       ],
       "area": "Recording, replay, streaming, and outputs",
-      "capability": "Four physical external outputs",
-      "acceptance": "Outputs 1–4 route independently to certified AJA/Blackmagic/Bluefish-class devices with embedded audio, reference/genlock, and key/fill where supported"
+      "capability": "Four physical external outputs through the FreeMix output SDK",
+      "acceptance": "Outputs 1–4 route independently to certified adapters implementing the FreeMix output SDK, with embedded audio, reference/genlock, and key/fill where supported"
     },
     {
       "id": "OR-009",
       "priority": "P1",
       "phase": 8,
       "owner": "codecs-network-recording",
-      "status": "blocked",
-      "exactIntegration": true,
+      "status": "planned",
+      "exactIntegration": false,
       "testsPresent": false,
       "dependencies": [
         "SW-012",
         "IN-017"
       ],
       "area": "Recording, replay, streaming, and outputs",
-      "capability": "NDI/OMT/SRT outputs",
-      "acceptance": "Four independently routed outputs with discovery, alpha where available, and audio mapping; NDI/OMT can also publish every Camera/Call and audio input plus audio-only buses"
+      "capability": "OMT/SRT outputs",
+      "acceptance": "Four independently routed outputs with discovery, alpha where available, and audio mapping; OMT can also publish every Camera/Call and audio input plus audio-only buses"
     },
     {
       "id": "OR-010",
@@ -1339,7 +1339,7 @@
       ],
       "area": "Remote guests, control, automation, and operations",
       "capability": "Up to eight encrypted browser guests",
-      "acceptance": "Host-a-call/connect-to-call, invite/password, direct/low-latency modes, camera/mic selection, dynamic bandwidth, return up to 1080p/4 Mbps, reconnect, lobby, remove, stats, and automatic NDI exposure"
+      "acceptance": "Host-a-call/connect-to-call, invite/password, direct/low-latency modes, camera/mic selection, dynamic bandwidth, return up to 1080p/4 Mbps, reconnect, lobby, remove, stats, and automatic OMT exposure"
     },
     {
       "id": "RC-002",

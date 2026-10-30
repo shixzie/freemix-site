@@ -10,6 +10,16 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: '2026-10-30',
+    range: '775eb1a..37d6b66',
+    title: 'Open network video, aux buses and no licensed SDKs',
+    items: [
+      'FreeMix now speaks OMT, the open media transport, through its own implementation: it publishes Program to the network, reads omt:// sources as inputs and finds them automatically. With this, FreeMix drops NDI, VST3 and every other licensed vendor SDK from its plans; capture cards, outputs and plugins will plug in through FreeMix’s own open SDKs instead.',
+      'The mixer gains aux buses A to G alongside Master, with their own meters and a Buses window in Studio for sends and output routing.',
+      'Replay inputs can be A/B linked on one transport and run playlists of events with per-entry speed, and Studio shows replay storage health and the recording time left. Reel exports wait for still-recording segments to close.',
+    ],
+  },
+  {
     date: '2026-10-27',
     range: 'c9e426c..775eb1a',
     title: 'Replay with sound, MIDI control and key profiles',

@@ -101,7 +101,7 @@ const areaColor = (a: string) => AREAS[a]?.color ?? 'var(--text-3)';
   <section class="wrap rm-foot" data-reveal>
     <p>
       Durations are the specification's estimates for an experienced team, not release dates. "Acceptance tests" means the ledger row has test files present in the repository; no row is marked complete until it passes on every applicable platform.
-      Ledger snapshot from <a href={`${REPO}/commit/${generatedFrom.commit}`} rel="noopener" class="mono">freemix@{generatedFrom.commit}</a> ({generatedFrom.date}): {totals.rows} rows, {totals.tested} with tests, {totals.blocked} waiting on licensed vendor SDKs.
+      Ledger snapshot from <a href={`${REPO}/commit/${generatedFrom.commit}`} rel="noopener" class="mono">freemix@{generatedFrom.commit}</a> ({generatedFrom.date}): {totals.rows} rows, {totals.tested} with tests{totals.blocked > 0 && `, ${totals.blocked} waiting on licensed vendor SDKs`}.
     </p>
     <div class="cta">
       <a class="btn primary" href={url('features/')}>Browse planned features</a>
