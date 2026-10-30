@@ -11,6 +11,16 @@ export interface Update {
 export const UPDATES: Update[] = [
   {
     date: '2026-10-30',
+    range: '37d6b66..8497393',
+    title: 'Plugin chains in the mixer and a full replay multiview',
+    items: [
+      'Every audio strip and the Master bus can now run an ordered chain of plugins: the native engine renders FreeMix’s reference trim, polarity and soft-clip processors with latency compensation, the command line sends a chain, and Studio’s FX window reads and edits it.',
+      'The Replay panel shows every recorded angle of a cued event, up to eight, in one adaptive multiview composed by the engine.',
+      'The roadmap now ranks the structural work found by an architecture review ahead of new breadth: moving frame realization onto its own media thread and splitting the daemon into library crates.',
+    ],
+  },
+  {
+    date: '2026-10-30',
     range: '775eb1a..37d6b66',
     title: 'Open network video, aux buses and no licensed SDKs',
     items: [

@@ -79,14 +79,14 @@ export const PHASES: Phase[] = [
     n: 7, title: 'Replay and sports', short: 'Replay', weeks: '14–20 weeks', status: 'building',
     summary: 'Eight-camera instant replay with marks, A/B channels, highlights and export during record.',
     goals: ['Rolling segment storage per camera', 'Synchronised eight-source recording', 'Events, marks, tags and lists', 'Replay A/B, jog, shuttle and variable speed', 'Quad view, highlight reels and music beds'],
-    now: 'Up to four inputs record picture and sound into rolling segments; Replay inputs play events back, jog frame by frame, run playlists and link as an A/B pair; storage health reaches Studio; and highlight reels with dissolves and a music bed export to MP4. Shuttle and replay transitions are next.',
+    now: 'Up to eight inputs record picture and sound into rolling segments; Replay inputs play events back, jog frame by frame, run playlists and link as an A/B pair; the Replay panel shows every recorded angle of a cued event in one multiview; storage health reaches Studio; and highlight reels with dissolves and a music bed export to MP4. Shuttle and replay transitions are next.',
     exit: 'Sports Show scenario passes on certified storage.',
   },
   {
     n: 8, title: 'Professional hardware and formats', short: 'Hardware', weeks: '16–24 weeks, ongoing', status: 'groundwork',
     summary: 'Hardware and network adapters built on FreeMix’s own capture, output and plugin SDKs, with no licensed vendor SDKs, each shipped with its own conformance report.',
     goals: ['Blackmagic, AJA and Bluefish444 through the FreeMix capture and output SDK', 'OMT send and receive, implemented in-tree', 'Signed virtual camera and audio devices', 'Genlock, PTP, timecode and interlaced output', '10-bit HDR end to end, FreeMix plugins and UHD Profile B'],
-    now: 'FreeMix’s own OMT 1.0 transport publishes Program and reads omt:// sources with network discovery, and a plugin chain that orders, bypasses and compensates latency is in place. Capture-card adapters are next.',
+    now: 'FreeMix’s own OMT 1.0 transport publishes Program and reads omt:// sources with network discovery. A plugin chain that orders, bypasses and compensates latency runs FreeMix’s reference processors on every strip and on Master, and Studio’s FX window edits it. Capture-card adapters and real sandboxed plugins are next.',
     exit: 'Each adapter ships only with a platform-specific conformance report.',
   },
   {

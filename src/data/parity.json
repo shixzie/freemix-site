@@ -1,13 +1,13 @@
 {
   "generatedFrom": {
-    "commit": "37d6b667",
+    "commit": "8497393",
     "date": "2026-10-30",
-    "protocol": "2.125"
+    "protocol": "2.129"
   },
   "stats": {
     "crates": 60,
     "apps": 7,
-    "rustLines": 904634
+    "rustLines": 908503
   },
   "features": [
     {
@@ -984,7 +984,7 @@
       "owner": "audio-dsp",
       "status": "planned",
       "exactIntegration": false,
-      "testsPresent": false,
+      "testsPresent": true,
       "dependencies": [
         "AU-005"
       ],
