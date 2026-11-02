@@ -1,13 +1,13 @@
 {
   "generatedFrom": {
-    "commit": "8497393",
-    "date": "2026-10-30",
-    "protocol": "2.129"
+    "commit": "678f41c5",
+    "date": "2026-11-01",
+    "protocol": "2.152"
   },
   "stats": {
-    "crates": 60,
+    "crates": 68,
     "apps": 7,
-    "rustLines": 908503
+    "rustLines": 950872
   },
   "features": [
     {

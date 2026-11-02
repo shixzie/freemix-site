@@ -10,6 +10,18 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: '2026-11-02',
+    range: '8497393..678f41c',
+    title: 'Scoreboards, shared show clocks and a vMix-compatible API',
+    items: [
+      'Scoreboards gain sport presets, team rosters, a shot clock and tenths-of-a-second clocks, and tickers can crawl or roll in either direction with a logo and colour per item.',
+      'Shows can define named production clocks that titles, cue steps and scripts all read and run, with drop-frame timecode at 29.97 and 59.94.',
+      'The daemon now answers vMix-style TCP commands and state queries on the local machine, so tools built for vMix can cut, fade, run overlays, start recording and read input state on FreeMix.',
+      'PTZ cameras on VISCA over IP can be switched by preset as if each preset were an input, settings export to a file and import with a preview of what will change, and aux buses get their own effects chains, also editable from the browser operator page.',
+      'Behind the scenes, the daemon’s code was split into smaller modules and reached the size target set by last week’s architecture review.',
+    ],
+  },
+  {
     date: '2026-10-30',
     range: '37d6b66..8497393',
     title: 'Plugin chains in the mixer and a full replay multiview',

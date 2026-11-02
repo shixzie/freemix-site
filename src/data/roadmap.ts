@@ -65,7 +65,7 @@ export const PHASES: Phase[] = [
     n: 5, title: 'Graphics, data and automation', short: 'Graphics & automation', weeks: '12–16 weeks', status: 'building',
     summary: 'Titles, data-driven graphics, browser sources, playlists, scripts and every way to trigger them.',
     goals: ['Title scenes with shaping, animation and tickers', 'Title designer and live field editor', 'Isolated browser input with custom CSS', 'Data sources mapped to typed title fields', 'Triggers, macros, sandboxed Wasm scripts, PTZ and telestrator'],
-    now: 'The keyframe title animator, a browser title editor, data sources, cue lists with timed GO and previews, user shortcuts with chords and OSC, and sandboxed scripts are in the studio.',
+    now: 'The keyframe title animator, a browser title editor, scoreboards with sport presets, rosters and shot clocks, shared production clocks, data mapping with a preview, cue lists with timed GO, user shortcuts with chords and OSC, sandboxed scripts and VISCA PTZ presets as inputs are in the tree.',
     exit: 'Automation scenario resumes from the last revision with no duplicate actions.',
   },
   {
@@ -93,7 +93,7 @@ export const PHASES: Phase[] = [
     n: 9, title: 'Full parity and release certification', short: 'Release', weeks: '12–20 weeks', status: 'groundwork',
     summary: 'Close the last parity rows, then soak, audit and certify for release.',
     goals: ['vMix HTTP/TCP/tally compatibility adapter', 'Virtual sets and social moderation', 'Complete localisation and accessibility audit', '72-hour soak and disaster-recovery drills', 'External security and broadcast-operator review'],
-    now: 'A vMix API translator, virtual-set planner, social desk and English/Spanish UI catalogues are in progress.',
+    now: 'The daemon now answers vMix-style TCP commands and state queries on the local machine, translating them into FreeMix actions; authentication and the full vMix surface remain. A virtual-set planner, a social moderation desk and English/Spanish UI catalogues are in progress.',
     exit: 'No unclassified vMix 29 public feature remains.',
   },
 ];
