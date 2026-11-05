@@ -10,6 +10,17 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: '2026-11-05',
+    range: '678f41c..90cec13',
+    title: 'Secondary mixes, four routed outputs and live freeze',
+    items: [
+      'Shows can build secondary mixes, each with its own preview and program, cuts and transitions, and feed them to any of four logical outputs. Each output picks its own source, overlays or multiview grid.',
+      'Any input can be frozen on its current frame and resumed, or given a video delay. Inputs can also reuse a cropped part of another input or the live Program and Preview feeds.',
+      'Per-track WAV recordings now carry broadcast metadata and measured loudness. Studio edits recorder track maps and watches the files as they grow, and interrupted MP4 recordings recover more reliably.',
+      'Replay event lists can be edited in Studio and driven from the command line, with replay angles and speeds on console keys. Spreadsheets in XLSX and ODS format can feed titles and tickers, and PTZ cameras on a VISCA serial connection now work too.',
+    ],
+  },
+  {
     date: '2026-11-02',
     range: '8497393..678f41c',
     title: 'Scoreboards, shared show clocks and a vMix-compatible API',

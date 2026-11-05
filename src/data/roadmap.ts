@@ -44,7 +44,7 @@ export const PHASES: Phase[] = [
     n: 2, title: 'GPU playback switcher', short: 'GPU switcher', weeks: '10–14 weeks', status: 'building',
     summary: 'The first real pixels: wgpu compositing, file playback, the native studio shell and a program recorder.',
     goals: ['wgpu context, resource pools and render graph', 'Image, colour, bars and file playback', 'Transforms, crop, opacity, layers and colour conversion', 'Native studio with Preview, Program and transitions', 'Master bus, meters, fullscreen output and a fault-tolerant recorder'],
-    now: 'Native compositing, the egui studio console and media playback run today, including gapless media lists, stills, slideshows and PDF or slide decks; the daemon renders Program on the GPU.',
+    now: 'Native compositing, the egui studio console and media playback run today, including gapless media lists, stills, slideshows and PDF or slide decks; the daemon renders Program on the GPU, and four logical outputs each pick their own source, overlays or multiview.',
     exit: 'A one-hour Basic Show passes on every Tier-1 OS.',
   },
   {
