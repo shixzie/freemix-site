@@ -1,6 +1,6 @@
 // Regenerates src/data/parity.json from a FreeMix checkout.
 // Usage: FREEMIX_DIR=../freemix npm run sync
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { parse } from 'smol-toml';
@@ -38,8 +38,14 @@ const features = ledger.features.map((f) => {
 });
 
 const git = (...args) => execFileSync('git', ['-C', root, ...args], { encoding: 'utf8' }).trim();
-// The newest commit that names a protocol version; most commits don't change it.
-const protocol = git('log', '-500', '--format=%s').match(/protocol (\d+\.\d+)/i)?.[1] ?? null;
+// The wire version the code declares; older checkouts only name it in commit subjects.
+const versionFile = join(root, 'crates/foundation/fm-protocol/src/version.rs');
+const declared = existsSync(versionFile)
+  ? readFileSync(versionFile, 'utf8').match(/CURRENT_PROTOCOL_VERSION[^=]*=\s*ProtocolVersion::new\((\d+),\s*(\d+)\)/)
+  : null;
+const protocol = declared
+  ? `${declared[1]}.${declared[2]}`
+  : git('log', '-500', '--format=%s').match(/protocol (\d+\.\d+)/i)?.[1] ?? null;
 const tracked = git('ls-files').split('\n');
 const rustLines = tracked
   .filter((f) => f.endsWith('.rs'))
