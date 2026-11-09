@@ -10,6 +10,17 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: '2026-11-09',
+    range: '90cec13..32f8840',
+    title: 'Secondary mixes in Studio, alias effects and live data titles',
+    items: [
+      'Studio has a Secondary Mixes dialog. Each mix gets its own T-bar, fade to black, overlays and stingers, and its audio follows it to the outputs it feeds.',
+      'Alias inputs can carry their own effects, opacity and mask, edited from the input tile. Any input can be frozen from its tile and saved as a still image, and audio stays in step with video delays.',
+      'Titles can fill their fields from data rows fetched over HTTPS on a schedule. Studio previews a row before applying it.',
+      'Operators can turn on safe-area guides, which are saved with the show, and interlaced sources can be deinterlaced with motion-adaptive filtering.',
+    ],
+  },
+  {
     date: '2026-11-05',
     range: '678f41c..90cec13',
     title: 'Secondary mixes, four routed outputs and live freeze',
